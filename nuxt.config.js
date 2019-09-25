@@ -19,9 +19,14 @@ module.exports = {
 				hid: "description",
 				name: "description",
 				content: process.env.npm_package_description || ""
+			},
+			{
+				hid: 'og:image',
+				property: "og:image",
+				content: "http://projectmplus.com/wp-content/uploads/2019/09/mplus-og-image.jpg"
 			}
 		],
-		link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+		link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }]
 	},
 	/*
 	 ** Customize the progress-bar color
