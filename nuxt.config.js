@@ -2,6 +2,17 @@ const SITE_MAP = require("./modules/sitemap.js");
 const SITE_REDIRECTS = require("./modules/redirects.js");
 const SITE_PROXY = require("./modules/proxy.js");
 
+const features = [
+	'es6',
+	'Array.prototype.includes',
+	'CustomEvent',
+	'Object.entries',
+	'Object.values',
+	'URL',
+	'Math.trunc',
+	'EventSource'
+].join('%2C');
+
 module.exports = {
 	mode: "universal",
 	/*
@@ -26,7 +37,14 @@ module.exports = {
 				content: "http://projectmplus.com/wp-content/uploads/2019/09/mplus-og-image.jpg"
 			}
 		],
-		link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }]
+		link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
+		script: [
+			{
+				src: `https://polyfill.io/v3/polyfill.min.js?features=${features}`,
+				body: true,
+				type: "text/javascript"
+			},
+		]
 	},
 	/*
 	 ** Customize the progress-bar color
@@ -46,6 +64,7 @@ module.exports = {
 	 */
 	plugins: [
 		{ src: `~plugins/vee-validate.js`, ssr: true },
+		{ src: "~plugins/isotope.js", ssr: false }
 	],
 	/*
 	 ** Nuxt.js dev-modules

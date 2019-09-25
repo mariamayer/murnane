@@ -5,36 +5,37 @@
 			:data="page.acf.m_slider"
 		></intro-slider>
 
-		<b-container>
-			<b-row>
-				<b-col>
-					<header class="mb-4">
-						<h1 v-html="page.title.rendered"></h1>
-					</header>
-				</b-col>
-			</b-row>
-			<b-row
-				class="mb-5"
-			>
-				<b-col
-					sm=12
-					v-html="page.content.rendered"
-				>
-				</b-col>
-			</b-row>
+		<content-block
+			:data="page.content.rendered"
+		></content-block>
 
-		</b-container>
+		<masonry-content
+			:tax="taxonomy"
+			:data="page.acf.project_selector"
+		></masonry-content>
+
+
 	</article>
 </template>
 
 <script>
 import IntroSlider from '@/components/home/slider'
+import ContentBlock from '@/components/home/content'
+import MasonryContent from '@/components/home/masonry'
 
 import API_CONFIG from '@/assets/js/apiConfig.js'
 
 export default {
 	components: {
-		IntroSlider
+		IntroSlider,
+		ContentBlock,
+		MasonryContent
+	},
+	data(){
+		return {
+			page: '',
+			taxonomy: ''
+		}
 	},
 	head () {
 		return {
@@ -55,33 +56,26 @@ export default {
 					"articleBody": ""
 				}`,
 				type: 'application/ld+json'
-			}]
+			}],
+			script: [
+				{ src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js' }
+			],
 		}
 	},
-	async asyncData (context) {
-		return context.app.$axios.$get('/site/'+ API_CONFIG.basePagesUrl + '/5')
-				.then(function (data) {
+	async asyncData ({$axios}) {
+		const pageResponse = await $axios.get('/site/'+ API_CONFIG.basePagesUrl + '/5');
+		const taxResponse = await $axios.get('/site/wp/v2/portfolio_category');
 
-					let pageData = data;
+		pageResponse.data.yoast_meta.forEach(element => {
+			let firstValue = element[Object.keys(element)[0]];
+			element['hid'] = firstValue
+		});
 
-					pageData.yoast_meta.forEach(element => {
-						let firstValue = element[Object.keys(element)[0]];
-						element['hid'] = firstValue
-					});
-
-					return {
-						page: pageData
-					}
-				})
-				.catch(function (error) {
-					console.log(error);
-				})
-
-	},
-	data(){
 		return {
-			page: '',
+			page: pageResponse.data,
+			taxonomy: taxResponse.data
 		}
-	},
+
+	}
 };
 </script>
