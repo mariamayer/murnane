@@ -1,0 +1,7 @@
+// bootstrap override
+@import "settings/settings";
+@import '~bootstrap/scss/bootstrap.scss';
+
+article {
+	padding-top: 100px;
+}
