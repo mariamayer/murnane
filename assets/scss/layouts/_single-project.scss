@@ -1,0 +1,70 @@
+.single-project {
+	&__featured-img {
+		@include min-vh;
+		background-size: cover;
+		background-position: center;
+		position: relative;
+	}
+	&__down-arrow {
+		height: 42px;
+    	width: 59px;
+		display: block;
+		position: absolute;
+		bottom: 50px;
+		left: 0;
+		right: 0;
+		margin: auto;
+		cursor: pointer;
+		animation: MoveUpDown 1.5s ease-out infinite;
+		@keyframes MoveUpDown {
+			0%, 100% {
+				transform: translateY(0);
+			}
+			50% {
+				transform: translateY(30px);
+			}
+		}
+		&:after,
+		&:before {
+			background: $white;
+			content: '';
+			width: 50%;
+			height: 2px;
+			display: block;
+		}
+		&:after {
+			transform: rotate(45deg) translateX(14.5px) translateY(10px);
+		}
+		&:before {
+			transform: rotate(-45deg) translateX(-14.5px) translateY(10px);
+			float: right;
+		}
+	}
+
+	&__specific-features {
+		padding: 0;
+		li {
+			@include proxima-nova-light;
+			list-style: none;
+			margin-bottom: 15px;
+			color: $black;
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+	&__specific-desc {
+		color: $gray;
+	}
+	&__categories {
+		span {
+			color: $gray;
+		}
+	}
+	&__text {
+		p {
+			@extend .h3;
+			line-height: 30px;
+		}
+	}
+}

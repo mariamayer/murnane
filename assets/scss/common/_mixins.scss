@@ -44,21 +44,21 @@
     }
 }
 
-@mixin min-vh-md {
-	min-height: calc(100vh - 62px);
-	&:after {
-		content:'';
-		min-height:inherit;
-	}
-    @include media-breakpoint-up(md){
-		min-height: calc(100vh - 94.5px);
-    }
-}
+// @mixin min-vh-md {
+// 	min-height: calc(100vh - 62px);
+// 	&:after {
+// 		content:'';
+// 		min-height:inherit;
+// 	}
+//     @include media-breakpoint-up(md){
+// 		min-height: calc(100vh - 94.5px);
+//     }
+// }
 
-@mixin min-vh-scroll {
-	min-height: calc(100vh - 62px);
-	&:after {
-		content:'';
-		min-height:inherit;
-	}
-}
+// @mixin min-vh-scroll {
+// 	min-height: calc(100vh - 62px);
+// 	&:after {
+// 		content:'';
+// 		min-height:inherit;
+// 	}
+// }

@@ -44,3 +44,8 @@ h2,
 	font-size: 18px;
 	letter-spacing: .8px;
 }
+
+
+body {
+	@include proxima-nova-light();
+}

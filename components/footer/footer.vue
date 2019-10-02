@@ -14,19 +14,16 @@
 		>
 			<b-row>
 				<b-col
-					sm=12
 					md=4
 					v-html="contentLeft"
 				>
 				</b-col>
 				<b-col
-					sm=12
 					md=4
 					v-html="contentMiddle"
 				>
 				</b-col>
 				<b-col
-					sm=12
 					md=4
 				>
 
