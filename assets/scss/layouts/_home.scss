@@ -1,4 +1,14 @@
 .home-page {
+
+	&__intro {
+		h1 {
+			@extend .mb-100;
+		}
+		.container {
+			margin: 0;
+		}
+	}
+
 	&__slider {
 		.carousel-item {
 			height: 100vh;
@@ -18,6 +28,7 @@
 				height: 100vh;
 				width: 100%;
 				display: block;
+				z-index: 1;
 			}
 		}
 		.carousel-inner {
@@ -26,6 +37,85 @@
 		.carousel-control-prev,
 		.carousel-control-next {
 			z-index: 1;
+		}
+		.carousel-control-prev {
+			cursor: url(../images/Mplus-left-arrow.svg),auto!important;
+		}
+		.carousel-control-next {
+			cursor: url(../images/Mplus-right-arrow.svg),auto!important;
+		}
+		.carousel-control-prev-icon,
+		.carousel-control-next-icon {
+			opacity: 0;
+		}
+	}
+	&__slider-text {
+		position: absolute;
+		bottom: 30px;
+		left: 30px;
+	}
+	&__slider-white {
+		color: $white;
+	}
+	&__slider-black {
+		color: $black;
+	}
+
+	.grid-item-content {
+		&__link {
+			color: $black;
+			display: block;
+			&:before {
+				background: #f9ecdc;
+				height: 100%;
+				width: 100%;
+				left: 0;
+				opacity: 0;
+				top: 0;
+				position: absolute;
+				transition: opacity 0.3s ease-out;
+				z-index: 1;
+				content: '';
+				display: block;
+			}
+			img {
+				position: relative;
+				z-index: 0;
+			}
+			span {
+				@include centerer;
+				@extend .h3;
+				z-index: 2;
+				transition: opacity .3s ease-out;
+				opacity: 0;
+				text-align: center;
+				display: block;
+				width: 85%;
+			}
+			&:hover,
+			&:focus {
+				&:before {
+					opacity: .8;
+				}
+				span {
+					opacity: 1;
+				}
+			}
+		}
+	}
+
+	.button-group {
+		.button {
+			border: none;
+			border-radius: 0;
+			color: $black;
+			&:hover {
+				color: #0069d9;
+			}
+			&.btn-primary {
+				color: #0069d9;
+				background-color: transparent;
+			}
 		}
 	}
 }

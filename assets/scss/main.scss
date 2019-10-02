@@ -2,5 +2,16 @@
 @import "settings/settings";
 @import '~bootstrap/scss/bootstrap.scss';
 
+// common
+@import "common/global";
+@import "common/mixins";
+@import "common/type";
+
+// components
+@import "components/mailchimp";
+
 //layouts
+@import "layouts/header";
+@import "layouts/footer";
+@import "layouts/pages";
 @import "layouts/home";

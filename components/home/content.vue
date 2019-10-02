@@ -1,8 +1,10 @@
 <template>
-	<section>
+	<section
+		class="home-page__intro"
+	>
 		<b-container>
 			<b-row
-				class="mb-5"
+				class="mb-7 mt-7"
 			>
 				<b-col
 					sm=12

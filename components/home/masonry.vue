@@ -1,19 +1,21 @@
 <template>
-	<section>
+	<section
+		class="mb-7"
+	>
 
-			<div id="filters" class="button-group">
+			<div id="filters" class="button-group mb-3">
 				<button class="button btn btn-primary" @click="filter('*')" data-filter="*">
-					all
+					All—
 					<small>({{ data.length }})</small>
 				</button>
 				<button
 					v-for="item in tax"
-					:key="item.id"
-					@click="filter('.' + item.id)"
-					:class="'button btn btn-default ' + item.id"
-					:data-filter="item.id"
+					:key="item.slug"
+					@click="filter('.' + item.slug)"
+					:class="'button btn btn-default ' + item.slug"
+					:data-filter="item.slug"
 				>
-					{{ item.name }}
+					{{ item.name }}—
 				</button>
 			</div>
 			<div id="realizations_entries" class="row grid isotope row--isotope">
@@ -21,8 +23,15 @@
 
 				<div v-for="item in data" :key="item.id" :class="'col-md-4 col-lg-3 grid-item ' + item.categories_string">
 					<div class="grid-item-content">
-						<b-img-lazy v-bind="mainProps" :src="item.featured_image" alt="Image 1"></b-img-lazy>
-
+						<nuxt-link
+							class="grid-item-content__link"
+							:to="'/'+item.post_type+'/'+item.post_name"
+						>
+							<span
+								v-html="item.post_title"
+							></span>
+							<b-img-lazy v-bind="mainProps" :src="item.featured_image" alt="Image 1"></b-img-lazy>
+						</nuxt-link>
 					</div>
 				</div>
 			</div>
@@ -63,7 +72,18 @@ export default {
 		};
 	},
 	mounted() {
-		this.isotope();
+
+		if (this.$el.ownerDocument.readyState === "complete" || this.$el.ownerDocument.readyState === "loaded" || this.$el.ownerDocument.readyState === 'interactive') {
+			setTimeout(_ => {
+				this.isotope();
+			}, 750);
+		} else {
+			this.$el.ownerDocument.addEventListener('DOMContentLoaded', _ => {
+				setTimeout(_ => {
+					this.isotope();
+				}, 750);
+			});
+		}
 	},
   	methods: {
 		isotope() {
@@ -78,21 +98,21 @@ export default {
 			this.iso.layout();
 		},
 
-		filter: function(id) {
+		filter: function(item) {
 			let oldActive = $("#filters .btn-primary").first();
 
-			if (id === oldActive.data("filter")) {
+			if (item === oldActive.data("filter")) {
 				return;
 			}
 
-			let currentActive = $("#filters button" + id).first();
+			let currentActive = $("#filters button" + item).first();
 
 			currentActive.removeClass("btn-default").addClass("btn-primary");
 
 			oldActive.removeClass("btn-primary").addClass("btn-default");
 
 			this.iso.arrange({
-				filter: id
+				filter: item
 			});
 		}
 	}

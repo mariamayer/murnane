@@ -1,0 +1,64 @@
+@mixin aspect-ratio($width, $height) {
+	position: relative;
+	&:before {
+		display: block;
+		content: "";
+		width: 100%;
+		padding-top: ($height / $width) * 100%;
+	}
+}
+
+@mixin placeholder {
+	&.placeholder { @content; }
+	&:-moz-placeholder { @content; }
+	&::-moz-placeholder { @content; }
+	&::-webkit-input-placeholder { @content; }
+}
+
+@mixin link-transition {
+    transition: color .25s ease-out, background-color .25s ease-out, border .25s ease-out;
+}
+
+@mixin preview-title {
+    line-height: 1;
+    a {
+        @extend %font-preview-title;
+        display: block;
+    }
+}
+
+@mixin centerer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@mixin min-vh {
+	min-height: 100vh;
+	&:after {
+		content:'';
+		min-height:inherit;
+	}
+    @include media-breakpoint-up(lg){
+    }
+}
+
+@mixin min-vh-md {
+	min-height: calc(100vh - 62px);
+	&:after {
+		content:'';
+		min-height:inherit;
+	}
+    @include media-breakpoint-up(md){
+		min-height: calc(100vh - 94.5px);
+    }
+}
+
+@mixin min-vh-scroll {
+	min-height: calc(100vh - 62px);
+	&:after {
+		content:'';
+		min-height:inherit;
+	}
+}

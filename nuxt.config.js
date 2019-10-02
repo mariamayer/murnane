@@ -84,7 +84,8 @@ module.exports = {
 			keys: [
 				{ key: 'PREVIEW_URL', default: process.env.BASE_URL } // Specify a default value
 			]
-		}]
+		}],
+		'nuxt-webfontloader'
 		// google analytics example
 		// [
 		// 	"@nuxtjs/google-analytics",
@@ -96,6 +97,14 @@ module.exports = {
 	bootstrapVue: {
 		bootstrapCSS: false, // or `css`
 		bootstrapVueCSS: false // or `bvCSS`
+	},
+	/*
+	 ** fonts
+	 */
+	webfontloader: {
+		typekit: {
+			id: 'soa4xnj'
+		}
 	},
 	/*
 	 ** Site map w/ promise returned

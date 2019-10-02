@@ -15,7 +15,7 @@
 			>
 				<span
 					v-html="slide.title"
-					:class="slide.title_color"
+					:class="(slide.title_color === 'White' ? 'home-page__slider-white' : 'home-page__slider-black') + ' home-page__slider-text h2'"
 					aria-hidden="true"
 				>
 				</span>

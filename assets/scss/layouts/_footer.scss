@@ -1,0 +1,56 @@
+.footer {
+	background-color: $peach;
+
+	&__social {
+		padding: 0;
+		li {
+			list-style: none;
+			display: inline-block;
+			margin-left: 30px;
+			&:first-child {
+				margin-left: 0;
+			}
+		}
+	}
+	&__menu {
+		padding: 0;
+		li {
+			list-style: none;
+			width: 50%;
+			float: left;
+			padding-top: 15px;
+			&:nth-child(2),
+			&:first-child {
+				padding-top: 0;
+			}
+			&:nth-child(2n+1){
+				clear: both;
+			}
+		}
+		&:after {
+			content:'';
+			display: block;
+			width: 100%;
+			clear: both;
+		}
+	}
+	p {
+		line-height: 1.7;
+	}
+	a,
+	p,
+	h2 {
+		@extend .h3;
+		color: $black;
+	}
+	h2 {
+		margin-bottom: 50px;
+	}
+	a {
+		transition: color .25s ease-out;
+		text-decoration: none;
+		&:hover {
+			color: $blue;
+		}
+	}
+}

@@ -14,6 +14,17 @@
 			:data="page.acf.project_selector"
 		></masonry-content>
 
+		<!-- <gravity-form
+			:formData="newsLetter"
+			submitUrl="/form-submit/"
+		></gravity-form> -->
+
+		<section
+			class="mb-7"
+		>
+			<mail-chimp></mail-chimp>
+		</section>
+
 
 	</article>
 </template>
@@ -22,6 +33,8 @@
 import IntroSlider from '@/components/home/slider'
 import ContentBlock from '@/components/home/content'
 import MasonryContent from '@/components/home/masonry'
+import MailChimp from '@/components/global/mailchimp'
+// import GravityForm from '@/components/forms/gravity-form'
 
 import API_CONFIG from '@/assets/js/apiConfig.js'
 
@@ -29,7 +42,9 @@ export default {
 	components: {
 		IntroSlider,
 		ContentBlock,
-		MasonryContent
+		MasonryContent,
+		MailChimp
+		// GravityForm
 	},
 	data(){
 		return {
@@ -37,6 +52,11 @@ export default {
 			taxonomy: ''
 		}
 	},
+	// computed: {
+	// 	newsLetter(){
+	// 		return this.$store.state.gravityForms
+	// 	}
+	// },
 	head () {
 		return {
 			title: this.page.title.rendered,
@@ -62,9 +82,10 @@ export default {
 			],
 		}
 	},
-	async asyncData ({$axios}) {
-		const pageResponse = await $axios.get('/site/'+ API_CONFIG.basePagesUrl + '/5');
-		const taxResponse = await $axios.get('/site/wp/v2/portfolio_category');
+	async asyncData (context) {
+
+		const pageResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL+ API_CONFIG.basePagesUrl + '/5');
+		const taxResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL +'wp/v2/portfolio_category');
 
 		pageResponse.data.yoast_meta.forEach(element => {
 			let firstValue = element[Object.keys(element)[0]];

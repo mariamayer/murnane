@@ -1,0 +1,46 @@
+@font-face {
+    font-family: 'majesti-medium';
+    src: url('../fonts/majesti-banner-medium-webfont.woff2') format('woff2'),
+        url('../fonts/majesti-banner-medium-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@mixin proxima-nova-normal {
+	font-family: 'proxima-nova';
+	font-weight: 400;
+	font-style: normal;
+}
+
+@mixin proxima-nova-light {
+	font-family: 'proxima-nova';
+	font-weight: 300;
+	font-style: normal;
+}
+
+@mixin majest-medium {
+	font-family: 'majesti-medium';
+	font-weight: 400;
+    font-style: normal;
+}
+
+h1,
+.h1 {
+	@include majest-medium();
+	line-height: 1.2;
+	font-size: 52px;
+	color: #2a2e31;
+}
+
+h2,
+.h2 {
+	@include proxima-nova-light();
+	letter-spacing: 0.575px;
+	line-height: 29.9px;
+}
+
+.h3 {
+	@include proxima-nova-light();
+	font-size: 18px;
+	letter-spacing: .8px;
+}

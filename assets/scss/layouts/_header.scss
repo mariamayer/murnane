@@ -1,0 +1,73 @@
+.header {
+	&--main {
+		position: fixed;
+		left: 0;
+		top: 0;
+		z-index: 1;
+		width: 100%;
+		padding: 30px;
+	}
+	.site-logo {
+		max-height: 40px;
+		width: 111px;
+	}
+}
+
+.navigation-modal {
+	ul {
+		padding: 0;
+	}
+	li {
+		list-style: none;
+		text-align: center;
+	}
+	a {
+		@include proxima-nova-light;
+		color: $white;
+		font-size: 52px;
+		line-height: 1.5;
+		transition: color .25s ease-out;
+		text-decoration: none;
+		&:hover {
+			color: $blue;
+		}
+	}
+	.modal-content {
+		background: none;
+	}
+	&__close {
+		color: $white;
+		position: fixed;
+		top: 30px;
+		right: 30px;
+		width: 50px;
+		opacity: 0;
+		&--opacity {
+			opacity: 1;
+		}
+	}
+	&__button-toggle {
+		background: none;
+		border: none;
+		float: right;
+		border: none;
+		&:hover,
+		&:focus {
+			background-color: $white;
+			border: none;
+			box-shadow: none;
+		}
+		span {
+			background: $black;
+			display: block;
+			width: 25px;
+			height: 3px;
+			margin-bottom: 5px;
+			position: relative;
+			z-index: 1;
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
