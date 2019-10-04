@@ -65,6 +65,69 @@
 		p {
 			@extend .h3;
 			line-height: 30px;
+			margin-bottom: 30px;
+			&:last-child {
+				margin-bottom: 0;
+			}
 		}
+	}
+	&__full-container {
+		max-width: 100%;
+		overflow: hidden;
+		padding: 0;
+	}
+	&__pagination-link {
+		padding: 132px 125px;
+		min-height: 490px;
+		position: relative;
+		.h1,
+		.h3 {
+			display: block;
+		}
+		.h1 {
+			font-size: 30px;
+		}
+		.h3 {
+			color: $gray;
+		}
+		span {
+			transition: opacity .25s ease-out;
+		}
+		&:hover {
+			text-decoration: none !important;
+			span {
+				opacity: 0;
+			}
+			.single-project__pagination-bg {
+				opacity: 1;
+			}
+		}
+	}
+	&__pagination-bg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: block;
+		background-size: cover;
+		background-position: center;
+		opacity: 0;
+	}
+	&__prev {
+		background: $offPeach;
+		text-align: right;
+		.spacer {
+			padding-right: 15px;
+		}
+	}
+	&__next {
+		background: #fbf3e9;
+		.spacer {
+			padding-left: 15px;
+		}
+	}
+	&__copy {
+		font-size: 18px;
 	}
 }

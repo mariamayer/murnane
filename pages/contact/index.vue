@@ -139,7 +139,7 @@
 
 <script>
 import axios from 'axios'
-const consola = require('consola')
+// const consola = require('consola')
 
 export default {
 	data(){
@@ -160,7 +160,7 @@ export default {
 	methods: {
 		onSubmit(evt) {
 			evt.preventDefault()
-			consola.log(JSON.stringify(this.input_values))
+			console.log(JSON.stringify(this.input_values))
 		},
 		onchange($event, index, id) {
 			//console.log($event);
@@ -209,7 +209,7 @@ export default {
 					formFields: data
 				}
 			}).catch(e => {
-				consola.log(e);
+				console.log(e);
 			})
 
 	}

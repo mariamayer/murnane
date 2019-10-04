@@ -1,6 +1,6 @@
 <template>
 	<section
-		class="home-page__intro"
+		:class="setClass"
 	>
 		<b-container>
 			<b-row
@@ -18,6 +18,6 @@
 
 <script>
 export default {
-	props:['data']
+	props:['data','setClass']
 }
 </script>

@@ -1,31 +1,26 @@
 <template>
-	<article class="home-page">
-
+	<article class="about-page">
+		<!-- home slider -->
 		<intro-slider
 			:data="page.acf.m_slider"
 		></intro-slider>
 
+		<!-- home content block -->
 		<content-block
-			:data="page.content.rendered"
-			:setClass="'home-page__intro'"
+			:data="page.acf.opening_statement"
+			:class="'about-page__intro'"
 		></content-block>
 
-		<masonry-content
-			:tax="taxonomy"
-			:data="page.acf.project_selector"
-		></masonry-content>
+		<!-- services -->
+		<services-block
+			:data="page.acf.services_s_five"
+		></services-block>
 
-		<!-- <gravity-form
-			:formData="newsLetter"
-			submitUrl="/form-submit/"
-		></gravity-form> -->
-
-		<section
-			class="mb-7"
-		>
-			<mail-chimp></mail-chimp>
-		</section>
-
+		<!-- staff -->
+		<staff-content
+			:leadership="page.acf.principles"
+			:employees="page.acf.company_staff"
+		></staff-content>
 
 	</article>
 </template>
@@ -33,9 +28,8 @@
 <script>
 import IntroSlider from '@/components/home/slider'
 import ContentBlock from '@/components/home/content'
-import MasonryContent from '@/components/home/masonry'
-import MailChimp from '@/components/global/mailchimp'
-// import GravityForm from '@/components/forms/gravity-form'
+import ServicesBlock from '@/components/about/services'
+import StaffContent from '@/components/about/staff'
 
 import API_CONFIG from '@/assets/js/apiConfig.js'
 
@@ -43,21 +37,14 @@ export default {
 	components: {
 		IntroSlider,
 		ContentBlock,
-		MasonryContent,
-		MailChimp
-		// GravityForm
+		ServicesBlock,
+		StaffContent
 	},
 	data(){
 		return {
 			page: '',
-			taxonomy: ''
 		}
 	},
-	// computed: {
-	// 	newsLetter(){
-	// 		return this.$store.state.gravityForms
-	// 	}
-	// },
 	head () {
 		return {
 			title: this.page.title.rendered,
@@ -78,15 +65,11 @@ export default {
 				}`,
 				type: 'application/ld+json'
 			}],
-			// script: [
-			// 	{ src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js' }
-			// ],
 		}
 	},
 	async asyncData (context) {
 
-		const pageResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL+ API_CONFIG.basePagesUrl + '/5');
-		const taxResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL +'wp/v2/portfolio_category');
+		const pageResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL+ API_CONFIG.basePagesUrl + '/1680');
 
 		pageResponse.data.yoast_meta.forEach(element => {
 			let firstValue = element[Object.keys(element)[0]];
@@ -95,7 +78,6 @@ export default {
 
 		return {
 			page: pageResponse.data,
-			taxonomy: taxResponse.data
 		}
 
 	}

@@ -1,5 +1,5 @@
 <template>
-	<article class="single-project single-project--architecture">
+	<article class="single-project single-project--portfolio">
 		<!-- featured image -->
 		<featured-img :data="post"></featured-img>
 
@@ -80,7 +80,7 @@ export default {
 		}
 	},
 	asyncData({$axios,app,params, error}) {
-            return $axios.$get(app.$env.PREVIEW_URL + 'wp/v2/architecture_project?slug=' + params.slug)
+            return $axios.$get(app.$env.PREVIEW_URL + 'wp/v2/portfolio?slug=' + params.slug)
                 .then(data => {
 					let postData = data[0];
 

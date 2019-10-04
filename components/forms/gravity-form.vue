@@ -125,7 +125,7 @@
 
 <script>
 import axios from 'axios'
-const consola = require('consola')
+// const consola = require('consola')
 
 export default {
 	props:['formData','submitUrl'],
@@ -146,7 +146,7 @@ export default {
 	methods: {
 		onSubmit(evt) {
 			evt.preventDefault()
-			consola.log(JSON.stringify(this.input_values))
+			console.log(JSON.stringify(this.input_values))
 		},
 		onchange($event, index, id) {
 			//console.log($event);
