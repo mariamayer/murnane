@@ -53,6 +53,21 @@
 		.container {
 			max-width: 1600px;
 		}
+		.btn--blank {
+			span {
+				color: $black;
+			}
+			&:focus {
+				.about-page__staff-individual-wrapper {
+					&:before {
+						opacity: .8;
+					}
+				}
+				.about-page__staff-name {
+					opacity: .8;
+				}
+			}
+		}
 	}
 
 	&__staff-individual {
@@ -103,5 +118,74 @@
 		span {
 			display: block;
 		}
+	}
+
+	&__clients {
+		ul {
+			padding: 0;
+		}
+		li {
+			list-style: none;
+			margin-bottom: 5px;
+			&:last-child{
+				@include media-breakpoint-up(md){
+					margin-bottom: 0;
+				}
+			}
+		}
+	}
+	&__careers {
+		background-color: #ededed;
+		.job-list {
+			padding: 0;
+			li {
+				list-style: none;
+				margin-bottom: 10px;
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+		}
+	}
+}
+
+.modal-leadership {
+	.modal-content {
+		border-radius: 0;
+	}
+	.modal-header {
+		border-bottom: none;
+	}
+	.modal-body {
+		@include media-breakpoint-up(lg){
+			padding: 0 45px 45px;
+		}
+		span {
+			display: block;
+		}
+
+	}
+	.modal-dialog {
+		@include media-breakpoint-up(lg){
+			max-width: 630px;
+		}
+	}
+}
+.modal-job {
+	.modal-content {
+		border-radius: 0;
+	}
+	.modal-header {
+		border-bottom: none;
+	}
+	.modal-body {
+		@include media-breakpoint-up(lg){
+			padding: 0 45px 45px;
+		}
+	}
+}
+.modal-backdrop {
+	&--opacity {
+		opacity: .8;
 	}
 }

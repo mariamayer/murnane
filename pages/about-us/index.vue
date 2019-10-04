@@ -22,6 +22,25 @@
 			:employees="page.acf.company_staff"
 		></staff-content>
 
+		<!-- clients -->
+		<clients-content
+			:clientsTitle="page.acf.title_s_nine"
+			:clients="page.acf.client_list_s_nine"
+		></clients-content>
+
+		<!-- learn more -->
+		<learn-more
+			:setClass="'pb-7'"
+		></learn-more>
+
+		<!-- careers -->
+		<careers-content
+			:sectionTitle="page.acf.title_careers"
+			:sectionLocation="page.acf.location_careers"
+			:sectionContent="page.acf.description_careers"
+			:currentJobs="careers"
+		></careers-content>
+
 	</article>
 </template>
 
@@ -30,6 +49,9 @@ import IntroSlider from '@/components/home/slider'
 import ContentBlock from '@/components/home/content'
 import ServicesBlock from '@/components/about/services'
 import StaffContent from '@/components/about/staff'
+import ClientsContent from '@/components/about/clients'
+import LearnMore from '@/components/global/learnMore'
+import CareersContent from '@/components/about/careers'
 
 import API_CONFIG from '@/assets/js/apiConfig.js'
 
@@ -38,11 +60,15 @@ export default {
 		IntroSlider,
 		ContentBlock,
 		ServicesBlock,
-		StaffContent
+		StaffContent,
+		ClientsContent,
+		LearnMore,
+		CareersContent
 	},
 	data(){
 		return {
 			page: '',
+			careers: ''
 		}
 	},
 	head () {
@@ -70,6 +96,7 @@ export default {
 	async asyncData (context) {
 
 		const pageResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL+ API_CONFIG.basePagesUrl + '/1680');
+		const caerresResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL+ API_CONFIG.careersUrl);
 
 		pageResponse.data.yoast_meta.forEach(element => {
 			let firstValue = element[Object.keys(element)[0]];
@@ -78,6 +105,7 @@ export default {
 
 		return {
 			page: pageResponse.data,
+			careers: caerresResponse.data
 		}
 
 	}

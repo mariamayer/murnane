@@ -4,7 +4,7 @@
 	>
 		<b-container>
 			<b-row
-				class="mb-7 mt-7"
+				class="mt-7"
 			>
 				<b-col
 					md=4

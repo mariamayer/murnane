@@ -1,0 +1,25 @@
+.btn {
+	&--blank {
+		background: none;
+		border: none;
+		padding: 0;
+		border-radius: 0;
+		color: $black;
+		&:focus,
+		&:active {
+			box-shadow: none !important;
+		}
+	}
+
+	&--mplus {
+		border-radius: 0;
+		border-color: $black;
+		padding: 10px 30px;
+		&:hover,
+		&:focus,
+		&:active {
+			color: $white;
+			background-color: $black;
+		}
+	}
+}

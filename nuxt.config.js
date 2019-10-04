@@ -35,7 +35,8 @@ module.exports = {
 				hid: 'og:image',
 				property: "og:image",
 				content: "http://projectmplus.com/wp-content/uploads/2019/09/mplus-og-image.jpg"
-			}
+			},
+			{ hid: 'robots', name: 'robots', content: 'noindex, nofollow' }
 		],
 		link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
 		script: [

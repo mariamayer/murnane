@@ -11,32 +11,69 @@
 					md=4
 					lg=3
 					class="about-page__staff-individual"
-					v-for="(person) in leadership"
+					v-for="(person,index) in leadership"
 					:key="person.profile_image.ID"
 				>
-					<span
-						class="about-page__staff-individual-wrapper"
+					<b-button
+						v-b-modal="'modal-leadership-'+index"
+						class="btn--blank"
 					>
 						<span
-							class="about-page__staff-name"
+							class="about-page__staff-individual-wrapper"
 						>
 							<span
-								v-html="person.name"
-								class="h2"
+								class="about-page__staff-name"
 							>
+								<span
+									v-html="person.name"
+									class="h2"
+								>
+								</span>
+								<span
+									v-html="person.title"
+									class="h3"
+								>
+								</span>
 							</span>
-							<span
-								v-html="person.title"
-								class="h3"
-							>
-							</span>
+							<b-img-lazy
+								v-bind="mainProps"
+								:src="person.profile_image.url"
+								:alt="person.name"
+							></b-img-lazy>
 						</span>
-						<b-img-lazy
-							v-bind="mainProps"
-							:src="person.profile_image.url"
-							:alt="person.name"
-						></b-img-lazy>
-					</span>
+					</b-button>
+
+					<b-modal
+						:id="'modal-leadership-'+index"
+						title=""
+						centered
+						@shown="addOpacity"
+						modal-class="modal-leadership"
+						hide-footer
+					>
+
+						<span
+							class="h3"
+							v-html="person.title"
+						>
+						</span>
+						<span
+							class="h2 mb-5"
+							v-html="person.name"
+						></span>
+
+						<div
+							v-html="person.description"
+							class="mb-5"
+						></div>
+
+						<nuxt-link
+							to="contact-us"
+							class="btn btn--mplus"
+						>
+							Let's talk
+						</nuxt-link>
+					</b-modal>
 				</b-col>
 
 				<b-col
@@ -91,6 +128,14 @@ export default {
 				width: 640,
 				height: 960,
 			}
+		}
+	},
+	methods: {
+		addOpacity(){
+			// console.log('click');
+			let backDrop = document.querySelector('.modal-backdrop');
+			backDrop.classList.add('modal-backdrop--opacity');
+			// console.log(backDrop);
 		}
 	}
 }
