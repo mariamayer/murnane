@@ -42,8 +42,16 @@
 		right: 30px;
 		width: 50px;
 		opacity: 0;
+		transition: opacity .25s ease-out;
+		border: none;
+		font-size: 24px;
+		line-height: .85;
 		&--opacity {
 			opacity: 1;
+		}
+		&:focus {
+			border-color: $white;
+			box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 1);
 		}
 	}
 	&__button-toggle {
