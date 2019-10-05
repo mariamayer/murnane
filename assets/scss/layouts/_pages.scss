@@ -62,3 +62,80 @@ main {
 		}
 	}
 }
+
+
+.contact-page {
+	&__acf-content {
+		p {
+			@extend .h2;
+			line-height: 1.5;
+			margin-bottom: 30px;
+		}
+		ul {
+			padding: 0;
+			margin-bottom: 30px;
+			@include media-breakpoint-up(md){
+				padding-top: 30px;
+			}
+			li {
+				list-style: none;
+				margin-bottom: 10px;
+				&:first-child {
+					margin-bottom: 15px;
+				}
+				h3 {
+					color: $gray;
+					@extend .h3;
+				}
+				a {
+					color: $black;
+					transition: color .25s ease-out;
+					&:hover {
+						color: $blue;
+						text-decoration: none;
+					}
+				}
+			}
+			@include media-breakpoint-up(md){
+				float: left;
+				width: 33.2%
+			}
+		}
+		&:after {
+			content:'';
+			clear: both;
+			display: block;
+			width: 100%;
+		}
+	}
+	&__content {
+		p {
+			@extend .h3;
+			line-height: 1.4;
+		}
+	}
+	.gravity-form {
+		label {
+			@extend .sr-only
+		}
+		input {
+			margin-bottom: 50px;
+		}
+		input,
+		textarea {
+			border-color: $black;
+			border-left: none;
+			border-right: none;
+			border-top: none;
+			border-radius: 0;
+			padding-left: 0;
+		}
+		.btn-primary {
+			@extend .btn--mplus;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			font-size: 12px;
+			padding: 15px 50px;
+		}
+	}
+}

@@ -117,7 +117,7 @@ export default {
 			let self = this;
 
 			thisButton.setAttribute('disabled', 'true');
-
+			thisButton.innerHTML = 'Loading...'
 			this.$axios.get(this.$env.PREVIEW_URL + API_CONFIG.basePostsUrl + `?per_page=9&page=${this.postsPage}`)
 			.then(function (response) {
 					// get total pages and add to current count
@@ -129,6 +129,7 @@ export default {
 						thisButton.classList.add('d-none');
 					} else {
 						thisButton.removeAttribute('disabled');
+						thisButton.innerHTML = 'Load More'
 					}
 					//add new posts to the page
 					response.data.forEach(element => {
@@ -139,6 +140,7 @@ export default {
 				.catch(function (error) {
 					// handle error
 					console.log(error);
+					thisButton.innerHTML = 'OH NO! Something went wrong'
 				})
 				.finally(function () {
 					// always executed
@@ -167,7 +169,7 @@ export default {
 					],
 					"mainEntityOfPage": {
 						"@type": "WebPage",
-						"@id": "https://projectmplus.com"
+						"@id": "https://projectmplus.com`+ this.$route.fullPath +`"
 					},
 					"publisher" : {
 						"@type" : "Organization",

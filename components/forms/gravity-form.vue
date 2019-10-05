@@ -2,7 +2,7 @@
 	<div class="rmh-form">
 		<div id="rmh-form-response"></div>
 
-		<b-form @submit.prevent="validateBeforeSubmit" v-show="showForm">
+		<b-form @submit.prevent="validateBeforeSubmit" v-show="showForm" class="gravity-form">
 
 			<div v-for="(inputType,index) in formData.fields" :key="inputType.id">
 
@@ -109,7 +109,9 @@
 				></b-form-input>
 			</b-form-group>
 
-			<b-button type="submit" variant="primary">Submit</b-button>
+			<b-button type="submit" variant="primary">
+				Send
+			</b-button>
 		</b-form>
 	</div>
 </template>

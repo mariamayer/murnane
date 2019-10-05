@@ -12,7 +12,7 @@ const proxyApis = {
 		changeOrigin: true
 	},
 	"/form-submit/": {
-		target: process.env.BASE_URL + "gf/v2/forms/1/submissions",
+		target: process.env.BASE_URL + "gf/v2/forms/2/submissions",
 		auth: process.env.G_FORMS_K + ':' + process.env.G_FORMS_K_SECRET,
 		pathRewrite: { "^/form-submit/": "" },
 		changeOrigin: true

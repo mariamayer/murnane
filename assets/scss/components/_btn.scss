@@ -12,9 +12,11 @@
 	}
 
 	&--mplus {
-		border-radius: 0;
+		color: $black;
 		border-color: $black;
+		border-radius: 0;
 		padding: 10px 30px;
+		background-color: transparent;
 		&:hover,
 		&:focus,
 		&:active {
