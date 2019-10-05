@@ -1,5 +1,5 @@
 const express = require("express");
-const consola = require("consola");
+// const consola = require("consola");
 const { Nuxt, Builder } = require("nuxt");
 const app = express();
 app.disable('x-powered-by');
@@ -27,9 +27,11 @@ async function start() {
 
 	// Listen the server
 	app.listen(port, host);
-	consola.ready({
-		message: `Server listening on http://${host}:${port}`,
-		badge: true
-	});
+	// consola.ready({
+	// 	message: `Server listening on http://${host}:${port}`,
+	// 	badge: true
+	// });
+	console.log('Server listening on http://' + host + ':' + port) // eslint-disable-line no-console
+
 }
 start();

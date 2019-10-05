@@ -57,11 +57,11 @@ export default {
 					"headline": "${this.post.title.rendered}",
 					"author" : {
 						"@type" : "Person",
-						"name" : "Rory Heaney",
+						"name" : "Project M Plus",
 						"url":"https://projectmplus.com/"
 					},
 					"creator":[
-						"Rory Heaney"
+						"Project M Plus"
 					],
 					"mainEntityOfPage": {
 						"@type": "WebPage",
@@ -69,7 +69,7 @@ export default {
 					},
 					"publisher" : {
 						"@type" : "Organization",
-						"name" : "Project M PLus",
+						"name" : "Project M PLus"
 					},
 					"datePublished": "${this.post.date}",
 					"dateCreated": "${this.post.date}",

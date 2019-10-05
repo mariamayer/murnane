@@ -15,11 +15,6 @@
 			:data="page.acf.project_selector"
 		></masonry-content>
 
-		<!-- <gravity-form
-			:formData="newsLetter"
-			submitUrl="/form-submit/"
-		></gravity-form> -->
-
 		<section
 			class="mb-7"
 		>
@@ -67,14 +62,28 @@ export default {
 				// innerHTML: JSON.stringify(this.structuredData),
 				innerHTML: `{
 					"@context" : "http://schema.org",
-					"@type" : "NewsArticle",
-					"name" : "`+ this.page.title.rendered +`",
-					"headline": "`+ this.page.title.rendered +`",
-					"datePublished": "`+ this.page.date +`",
-					"dateCreated": "`+ this.page.date +`",
-					"dateModified": "`+ this.page.date +`",
-					"image": "",
-					"articleBody": ""
+					"@type" : "Article",
+					"name" : "${this.page.title.rendered}",
+					"headline": "${this.page.title.rendered}",
+					"author" : {
+						"@type" : "Person",
+						"name" : "Project M Plus",
+						"url":"https://projectmplus.com/"
+					},
+					"creator":[
+						"Project M Plus"
+					],
+					"mainEntityOfPage": {
+						"@type": "WebPage",
+						"@id": "https://projectmplus.com"
+					},
+					"publisher" : {
+						"@type" : "Organization",
+						"name" : "Project M PLus"
+					},
+					"datePublished": "${this.page.date}",
+					"dateCreated": "${this.page.date}",
+					"dateModified": "${this.page.date}"
 				}`,
 				type: 'application/ld+json'
 			}],

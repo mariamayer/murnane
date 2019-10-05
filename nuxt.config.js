@@ -10,7 +10,8 @@ const features = [
 	'Object.values',
 	'URL',
 	'Math.trunc',
-	'EventSource'
+	'EventSource',
+	'Symbol.split'
 ].join('%2C');
 
 module.exports = {
@@ -19,6 +20,9 @@ module.exports = {
 	 ** Headers of the page
 	 */
 	head: {
+		htmlAttrs: {
+			lang: 'en-US',
+		},
 		title: process.env.npm_package_name || "",
 		meta: [
 			{ charset: "utf-8" },
@@ -86,7 +90,22 @@ module.exports = {
 				{ key: 'PREVIEW_URL', default: process.env.BASE_URL } // Specify a default value
 			]
 		}],
-		'nuxt-webfontloader'
+		'nuxt-webfontloader',
+		['@nuxtjs/robots',[
+				{
+					UserAgent: '*',
+					Disallow: () => '' // accepts function
+				},
+				{
+					UserAgent: 'Twitterbot',
+					Disallow: () => '' // accepts function
+				},
+				{
+					UserAgent: 'facebookexternalhit/1.1',
+					Disallow: () => '' // accepts function
+				},
+			]
+		]
 		// google analytics example
 		// [
 		// 	"@nuxtjs/google-analytics",
