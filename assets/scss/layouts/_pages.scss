@@ -9,6 +9,10 @@ main {
 	}
 }
 
+.overflow-hidden {
+	overflow: hidden;
+}
+
 .posts-page {
 	&__container {
 		@include media-breakpoint-up(xl) {

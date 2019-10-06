@@ -1,6 +1,6 @@
 <template>
 	<section
-		class="mb-7"
+		class="home-page__masonry mb-7"
 	>
 
 			<div id="filters" class="button-group mb-3">

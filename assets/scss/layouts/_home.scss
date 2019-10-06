@@ -60,6 +60,9 @@
 	&__slider-black {
 		color: $black;
 	}
+	&__masonry {
+		overflow: hidden;
+	}
 
 	.grid-item-content {
 		&__link {

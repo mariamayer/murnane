@@ -9,30 +9,13 @@ export const state = () => ({
 		content_left: '',
 		content_middle: '',
 		social: ''
-	}
-	// siteSocialLinks: '',
-	// headerContent: '',
-	// availabilityLink: '',
-	// instagram: '',
-	// bodyClass: '',
-	// forms: '',
-	// instagramClass: '',
-	// baseClass: '',
-	// homeCta: '',
-	// sms: '',
-	// popup: {
-	// 	title: '',
-	// 	subTitle: '',
-	// 	phone: '',
-	// 	timeOut: ''
-	// }
+	},
+	instaDesign: '',
+	instaArchitecture: ''
 })
 
 
 export const mutations = {
-	// add(state, title) {
-	// 	state.list.push(title)
-	// }
 	SET_MENU(state, payload){
 		state.wordPressMenu = payload
 		// console.log('no');
@@ -50,12 +33,12 @@ export const mutations = {
 		state.footer.content_middle = payload.acf.content_middle_f;
 		state.footer.social = payload.acf.social_links;
 	},
-	// SET_INSTAGRAM(state, payload){
-	// 	state.instagram = payload
-	// },
-	// SET_BODY_CLASS(state, payload){
-	// 	state.bodyClass = payload
-	// },
+	SET_INSTAGRAM_D(state, payload){
+		state.instaDesign = payload
+	},
+	SET_INSTAGRAM_A(state, payload){
+		state.instaArchitecture = payload
+	},
 	// SET_BASE_CLASS(state, payload){
 	// 	state.baseClass = payload
 	// },
@@ -71,10 +54,14 @@ export const actions = {
 		const navMenu = await axios.get(this.$env.PREVIEW_URL + API_CONFIG.mainMenuUrl);
 		const footerMenu = await axios.get(this.$env.PREVIEW_URL + API_CONFIG.footerMenuUrl);
 		const acfOptionsData = await axios.get(this.$env.PREVIEW_URL + 'acf/v3/options/options');
-		// const instagram = await axios.get(process.env.BASE_URL + 'wp/v2/instagram');
+		const instaDesignData = await axios.get(this.$env.PREVIEW_URL + 'wp/v2/instagram_design');
+		const instaArchitectureData = await axios.get(this.$env.PREVIEW_URL + 'wp/v2/architecture_insta');
+
 		commit('SET_MENU', navMenu.data);
 		commit('SET_FOOTER_MENU', footerMenu.data);
 		commit('SET_ACF_OPTIONS', acfOptionsData.data);
-		// commit('SET_INSTAGRAM', instagram.data)
+		commit('SET_INSTAGRAM_D', instaDesignData.data);
+		commit('SET_INSTAGRAM_A', instaArchitectureData.data);
+
 	},
 }

@@ -105,14 +105,14 @@ module.exports = {
 					Disallow: () => '' // accepts function
 				},
 			]
-		]
+		],
 		// google analytics example
-		// [
-		// 	"@nuxtjs/google-analytics",
-		// 	{
-		// 		id: "UA-#######-##"
-		// 	}
-		// ]
+		[
+			"@nuxtjs/google-analytics",
+			{
+				id: "UA-50556431-1"
+			}
+		]
 	],
 	bootstrapVue: {
 		bootstrapCSS: false, // or `css`

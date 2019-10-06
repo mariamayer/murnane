@@ -3,10 +3,38 @@
 		class="footer"
 	>
 		<!-- check if home -->
-		<b-container></b-container>
+		<b-container
+			class="footer__link-container"
+		>
+			<b-row>
+				<b-col
+					class="text-center"
+				>
+					<a
+						href="https://www.instagram.com/projectmplus/"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Follow @projectmplus
+					</a>
+				</b-col>
+			</b-row>
+		</b-container>
 
 		<!-- instagram, check if home -->
-		<div></div>
+		<no-ssr>
+			<div class="footer__instagram">
+				<ul class="instagram-list">
+					<li
+						v-for="(item,index) in instaA"
+						:key="index"
+						:style="{ backgroundImage: 'url(' + item.better_featured_image.source_url + ')' }"
+						v-html="item.content.rendered"
+					>
+					</li>
+				</ul>
+			</div>
+		</no-ssr>
 
 		<!-- misc -->
 		<b-container
@@ -29,11 +57,11 @@
 
 					<ul class="footer__menu">
 						<li
-							v-for="item in footerMenu"
+							v-for="item in updatedMenu"
 							:key="item.id"
 						>
 							<nuxt-link
-								to=""
+								:to="item.url"
 							>
 								{{item.title}}
 							</nuxt-link>
@@ -52,8 +80,8 @@
 				<b-col>
 					<ul class="footer__social">
 						<li
-							v-for="item in socialLinks"
-							:key="item.index"
+							v-for="(item,index) in socialLinks"
+							:key="index"
 						>
 							<a
 								:href="item.link"
@@ -71,6 +99,11 @@
 
 <script>
 export default {
+	data(){
+		return {
+			footerName: ''
+		}
+	},
 	computed: {
 		contentLeft(){
 			return this.$store.state.footer.content_left;
@@ -84,6 +117,23 @@ export default {
 		footerMenu(){
 			return this.$store.state.footerMenu;
 		},
+		updatedMenu(){
+			let currentUrl = this.$store.state.footerMenu;
+			currentUrl.forEach(element => {
+				let string = 'https://projectmplus.com';
+				let url = element.url;
+				let replacement = url.replace(string,'');
+				element['url'] = replacement;
+			});
+
+			return currentUrl;
+		},
+		instaA(){
+			return this.$store.state.instaArchitecture
+		},
+		instaD(){
+			return this.$store.state.instaDesign
+		}
 	}
 }
 </script>
