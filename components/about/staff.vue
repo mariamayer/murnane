@@ -1,6 +1,6 @@
 <template>
 	<section
-		class="about-page__staff"
+		class="about-page__staff overflow-hidden"
 		>
 
 		<b-container>

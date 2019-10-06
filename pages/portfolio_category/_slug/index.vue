@@ -17,7 +17,7 @@
 
 		<section>
 			<b-container
-				class="container--full"
+				class="container--full overflow-hidden"
 			>
 				<b-row>
 					<nuxt-link

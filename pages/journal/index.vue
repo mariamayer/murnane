@@ -18,7 +18,9 @@
 			<b-container
 				class="posts-page__container"
 			>
-				<b-row>
+				<b-row
+					class="overflow-hidden"
+				>
 					<!-- journal starts -->
 					<article
 						class="col-md-6 col-lg-4 col-12 pb-6 posts-page__post"

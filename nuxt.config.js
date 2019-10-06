@@ -4,14 +4,7 @@ const SITE_PROXY = require("./modules/proxy.js");
 
 const features = [
 	'es6',
-	'Array.prototype.includes',
-	'CustomEvent',
-	'Object.entries',
-	'Object.values',
-	'URL',
-	'Math.trunc',
-	'EventSource',
-	'Symbol.split'
+	'EventSource'
 ].join('%2C');
 
 module.exports = {
@@ -95,15 +88,7 @@ module.exports = {
 				{
 					UserAgent: '*',
 					Disallow: () => '' // accepts function
-				},
-				{
-					UserAgent: 'Twitterbot',
-					Disallow: () => '' // accepts function
-				},
-				{
-					UserAgent: 'facebookexternalhit/1.1',
-					Disallow: () => '' // accepts function
-				},
+				}
 			]
 		],
 		// google analytics example
