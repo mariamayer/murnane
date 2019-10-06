@@ -1,6 +1,6 @@
 <template>
 	<article
-			class="pt-7 pb-7 posts-page"
+			class="pt-7 posts-page"
 		>
 		<b-container
 			class="posts-page__container pb-5"
@@ -17,11 +17,11 @@
 
 		<section>
 			<b-container
-				class="posts-page__container"
+				class="container--full"
 			>
 				<b-row>
 					<nuxt-link
-						class="grid-item-content__link col-md-4 col-6"
+						class="project-preview project-preview--col-replacement col-md-4 col-6"
 						v-for="item in posts"
 						:key="item.id"
 						:to="'/'+item.type+'/'+item.slug"
@@ -35,7 +35,11 @@
 				</b-row>
 			</b-container>
 
-			<!-- <b-container>
+			<b-container
+				ref="loadingContainer"
+				class="pb-6 pt-6"
+				v-if="enoughPages"
+			>
 				<b-row>
 					<b-col
 						class="text-center"
@@ -49,7 +53,7 @@
 						</button>
 					</b-col>
 				</b-row>
-			</b-container> -->
+			</b-container>
 		</section>
 	</article>
 </template>
@@ -63,6 +67,7 @@ export default {
 		return {
 			page: '',
 			posts:'',
+			enoughPages: true,
 			postsPage: 2,
 			mainProps: {
 				center: true,
@@ -77,39 +82,41 @@ export default {
 	},
 	methods: {
 		loadMorePosts(){
-			// console.log(this.$refs.loadMoreButton);
-			// let thisButton = this.$refs.loadMoreButton;
-			// let self = this;
 
-			// thisButton.setAttribute('disabled', 'true');
-			// thisButton.innerHTML = 'Loading...'
-			// this.$axios.get(this.$env.PREVIEW_URL + API_CONFIG.basePostsUrl + `?per_page=9&page=${this.postsPage}`)
-			// .then(function (response) {
-			// 		// get total pages and add to current count
-			// 		let totalPages = parseInt(response.headers['x-wp-totalpages']);
-			// 		self.postsPage += 1;
-			// 		// if the count and total match, hide load button
-			// 		// else enable it and keep going
-			// 		if(self.postsPage > totalPages){
-			// 			thisButton.classList.add('d-none');
-			// 		} else {
-			// 			thisButton.removeAttribute('disabled');
-			// 			thisButton.innerHTML = 'Load More'
-			// 		}
-			// 		//add new posts to the page
-			// 		response.data.forEach(element => {
-			// 			self.posts.push(element)
-			// 		});
+			let thisButton = this.$refs.loadMoreButton;
+			let loadingContainer = this.$refs.loadingContainer;
+			let self = this;
 
-			// 	})
-			// 	.catch(function (error) {
-			// 		// handle error
-			// 		console.log(error);
-			// 		thisButton.innerHTML = 'OH NO! Something went wrong'
-			// 	})
-			// 	.finally(function () {
-			// 		// always executed
-			// 	});
+			thisButton.setAttribute('disabled', 'true');
+			thisButton.innerHTML = 'Loading...'
+			this.$axios.get(this.$env.PREVIEW_URL + API_CONFIG.basePostsUrl + `?type[]=portfolio&type[]=architecture_project&filter[portfolio_category]=${this.$route.params.slug}&per_page=9&page=${this.postsPage}`)
+			.then(function (response) {
+					// get total pages and add to current count
+					let totalPages = parseInt(response.headers['x-wp-totalpages']);
+					self.postsPage += 1;
+					// if the count and total match, hide load button
+					// else enable it and keep going
+					if(self.postsPage > totalPages){
+						thisButton.classList.add('d-none');
+						loadingContainer.classList.add('d-none');
+					} else {
+						thisButton.removeAttribute('disabled');
+						thisButton.innerHTML = 'Load More'
+					}
+					//add new posts to the page
+					response.data.forEach(element => {
+						self.posts.push(element)
+					});
+
+				})
+				.catch(function (error) {
+					// handle error
+					console.log(error);
+					thisButton.innerHTML = 'OH NO! Something went wrong'
+				})
+				.finally(function () {
+					// always executed
+				});
 		}
 	},
 	head () {
@@ -156,14 +163,17 @@ export default {
 		const pageResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL+ 'wp/v2/portfolio_category?slug=' + context.params.slug);
 		const postsResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL + API_CONFIG.basePostsUrl + '?type[]=portfolio&type[]=architecture_project&filter[portfolio_category]=' + context.params.slug +'&per_page=9');
 
-		// pageResponse.data.yoast_meta.forEach(element => {
-		// 	let firstValue = element[Object.keys(element)[0]];
-		// 	element['hid'] = firstValue
-		// });
+		// console.log(postsResponse.headers['x-wp-totalpages']);
+		const totalPostPages = parseInt(postsResponse.headers['x-wp-totalpages']);
+		let loadMoreBool = true;
+		if(2 > totalPostPages){
+			loadMoreBool = false;
+		}
 
 		return {
 			page: pageResponse.data[0],
-			posts: postsResponse.data
+			posts: postsResponse.data,
+			enoughPages: loadMoreBool
 		}
 
 	}

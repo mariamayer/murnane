@@ -3,6 +3,12 @@ main {
 	z-index: 0;
 }
 
+.container {
+	&--full {
+		max-width: 1920px;
+	}
+}
+
 .posts-page {
 	&__container {
 		@include media-breakpoint-up(xl) {
