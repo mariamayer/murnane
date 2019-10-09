@@ -193,10 +193,10 @@ export default {
 		const pageResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL+ API_CONFIG.basePagesUrl + '/609');
 		const postsResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL + API_CONFIG.basePostsUrl + '?per_page=9');
 
-		pageResponse.data.yoast_meta.forEach(element => {
-			let firstValue = element[Object.keys(element)[0]];
-			element['hid'] = firstValue
-		});
+		// pageResponse.data.yoast_meta.forEach(element => {
+		// 	let firstValue = element[Object.keys(element)[0]];
+		// 	element['hid'] = firstValue
+		// });
 
 		return {
 			page: pageResponse.data,

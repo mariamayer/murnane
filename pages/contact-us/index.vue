@@ -114,10 +114,10 @@ export default {
 
 					let pageData = data[0];
 
-					pageData.yoast_meta.forEach(element => {
-						let firstValue = element[Object.keys(element)[0]];
-						element['hid'] = firstValue
-					});
+					// pageData.yoast_meta.forEach(element => {
+					// 	let firstValue = element[Object.keys(element)[0]];
+					// 	element['hid'] = firstValue
+					// });
 
 					return {
 						page: pageData,

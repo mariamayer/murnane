@@ -74,7 +74,8 @@ module.exports = {
 	 */
 	plugins: [
 		{ src: "~plugins/isotope.js", ssr: false },
-		{ src: `~plugins/vee-validate.js`, ssr: true }
+		{ src: `~plugins/vee-validate.js`, ssr: true },
+		{ src: `~plugins/what-input.js`, ssr: true }
 	],
 	/*
 	 ** Nuxt.js dev-modules
@@ -84,6 +85,10 @@ module.exports = {
 	 ** Nuxt.js modules
 	 */
 	modules: [
+		// https://github.com/nuxt-community/analytics-module
+		['@nuxtjs/google-analytics', {
+			id: 'UA-50556431-1'
+		}],
 		// Doc: https://bootstrap-vue.js.org/docs/
 		"bootstrap-vue/nuxt",
 		// Doc: https://axios.nuxtjs.org/usage
@@ -96,14 +101,7 @@ module.exports = {
 				{ key: 'PREVIEW_URL', default: process.env.BASE_URL } // Specify a default value
 			]
 		}],
-		'nuxt-webfontloader',
-		// google analytics example
-		[
-			"@nuxtjs/google-analytics",
-			{
-				id: "UA-50556431-1"
-			}
-		]
+		'nuxt-webfontloader'
 	],
 	bootstrapVue: {
 		bootstrapCSS: false, // or `css`

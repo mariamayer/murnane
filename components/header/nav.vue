@@ -15,6 +15,7 @@
 		<b-button
 			@click="showModal"
 			class="navigation-modal__button-toggle"
+			aria-label="toggle navigation"
 		>
 			<span></span>
 			<span></span>
@@ -52,15 +53,21 @@
 					<nuxt-link
 						v-if="item.slug === '/'"
 						to="/"
+						v-on:keyup.enter.native="onEnter"
 					>
-						<span @click="hideModal">
+						<span
+							@click="hideModal"
+						>
 							{{item.title}}
 						</span>
 					</nuxt-link>
 					<nuxt-link
 						:to="'/'+ item.slug"
+						v-on:keyup.enter.native="onEnter"
 					>
-						<span @click="hideModal">
+						<span
+							@click="hideModal"
+						>
 							{{item.title}}
 						</span>
 					</nuxt-link>
@@ -81,6 +88,9 @@ export default {
 		},
 		hideModal() {
 			this.$refs['my-modal'].hide()
+		},
+		onEnter() {
+			this.$refs['my-modal'].hide();
 		},
 		focusOnClose(){
 			this.$refs.focusThis.focus()

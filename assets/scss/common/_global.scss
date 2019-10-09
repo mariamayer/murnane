@@ -117,3 +117,8 @@
 $peach: #f7f1eb;
 $gray: #999;
 $offPeach: #f9ecdc;
+
+[data-whatintent='mouse'] *:focus {
+	outline: none;
+	box-shadow: none;
+}

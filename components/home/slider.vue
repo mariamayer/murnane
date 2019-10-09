@@ -22,6 +22,7 @@
 				</span>
 				<nuxt-link
 					:to="slide.url_link"
+					:aria-label="slide.title"
 				>
 					<span
 						v-html="slide.title"

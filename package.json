@@ -28,7 +28,8 @@
 		"nuxt-trailingslash-module": "^1.1.0",
 		"nuxt-webfontloader": "^1.1.0",
 		"vee-validate": "^2.2.13",
-		"vueisotope": "3.1.2"
+		"vueisotope": "3.1.2",
+		"what-input": "^5.2.6"
 	},
 	"devDependencies": {
 		"node-sass": "^4.12.0",

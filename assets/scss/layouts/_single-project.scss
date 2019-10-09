@@ -77,9 +77,16 @@
 		padding: 0;
 	}
 	&__pagination-link {
-		padding: 132px 125px;
-		min-height: 490px;
+		padding: 55px 30px;
 		position: relative;
+		@include media-breakpoint-up(lg){
+			min-height: 400px;
+			padding: 132px 100px;
+		}
+		@include media-breakpoint-up(xl){
+			min-height: 490px;
+			padding: 132px 125px;
+		}
 		.h1,
 		.h3 {
 			display: block;

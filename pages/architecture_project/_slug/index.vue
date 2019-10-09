@@ -84,10 +84,10 @@ export default {
                 .then(data => {
 					let postData = data[0];
 
-					postData.yoast_meta.forEach(element => {
-						let firstValue = element[Object.keys(element)[0]];
-						element['hid'] = firstValue
-					});
+					// postData.yoast_meta.forEach(element => {
+					// 	let firstValue = element[Object.keys(element)[0]];
+					// 	element['hid'] = firstValue
+					// });
 
                     return {
                         post: postData,
