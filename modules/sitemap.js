@@ -6,8 +6,8 @@ const sitemap = {
 	generate: false,
 	routes () {
 		return axios.all([
-			axios.get(process.env.BASE_URL+'deep-thoughts/v2/portfolio?per_page=50'),
-			axios.get(process.env.BASE_URL+'wp/v2/architecture_project?per_page=50')
+			axios.get(process.env.BASE_URL+'rmh/v1/portfolio_links'),
+			axios.get(process.env.BASE_URL+'rmh/v1/architecture_project')
 		])
 		.then(axios.spread((portfolio, archProject) => [
 			...portfolio.data.map(item => '/portfolio/' + item.slug),
