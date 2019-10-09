@@ -2,6 +2,7 @@
 	<article class="about-page">
 		<!-- home slider -->
 		<intro-slider
+			v-if="page.acf.m_slider"
 			:data="page.acf.m_slider"
 		></intro-slider>
 
@@ -18,12 +19,14 @@
 
 		<!-- staff -->
 		<staff-content
+			v-if="page.acf.principles"
 			:leadership="page.acf.principles"
 			:employees="page.acf.company_staff"
 		></staff-content>
 
 		<!-- clients -->
 		<clients-content
+			v-if="page.acf.client_list_s_nine"
 			:clientsTitle="page.acf.title_s_nine"
 			:clients="page.acf.client_list_s_nine"
 		></clients-content>
@@ -54,6 +57,7 @@ import LearnMore from '@/components/global/learnMore'
 import CareersContent from '@/components/about/careers'
 
 import API_CONFIG from '@/assets/js/apiConfig.js'
+import axios from 'axios'
 
 export default {
 	components: {
@@ -71,57 +75,82 @@ export default {
 			careers: ''
 		}
 	},
+	mounted() {
+		let self = this;
+		axios.get(this.$env.PREVIEW_URL+ API_CONFIG.careersUrl,{
+			withCredentials: true
+		})
+			.then(function (response) {
+				// handle success
+				// console.log(response);
+				self.careers = response.data
+			})
+			.catch(function (error) {
+				// handle error
+				console.log(error);
+			})
+			.finally(function () {
+				// always executed
+			});
+	},
 	head () {
 		return {
-			title: this.page.title.rendered,
+			title: this.page.title ? this.page.title.rendered : '',
 			meta: this.page.yoast_meta,
 			__dangerouslyDisableSanitizers: ['script'],
-			script: [{
-				// innerHTML: JSON.stringify(this.structuredData),
-				innerHTML: `{
-					"@context" : "http://schema.org",
-					"@type" : "Article",
-					"name" : "${this.page.title.rendered}",
-					"headline": "${this.page.title.rendered}",
-					"author" : {
-						"@type" : "Person",
-						"name" : "Project M Plus",
-						"url":"https://projectmplus.com/"
-					},
-					"creator":[
-						"Project M Plus"
-					],
-					"mainEntityOfPage": {
-						"@type": "WebPage",
-						"@id": "https://projectmplus.com`+ this.$route.fullPath +`"
-					},
-					"publisher" : {
-						"@type" : "Organization",
-						"name" : "Project M PLus"
-					},
-					"datePublished": "${this.page.date}",
-					"dateCreated": "${this.page.date}",
-					"dateModified": "${this.page.date}"
-				}`,
-				type: 'application/ld+json'
-			}],
+			script: [{ innerHTML: JSON.stringify(this.structuredData), type: 'application/ld+json' }],
+			link: [
+				{
+					rel: "canonical",
+					href: "https://projectmplus.com/" + this.page.slug
+				}
+			]
 		}
 	},
 	async asyncData (context) {
+		return context.app.$axios.$get(context.app.$env.PREVIEW_URL+ API_CONFIG.basePagesUrl + '?slug=' + context.route.name)
+				.then(function (data) {
 
-		const pageResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL+ API_CONFIG.basePagesUrl + '/1680');
-		const caerresResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL+ API_CONFIG.careersUrl);
+					let pageData = data[0];
 
-		pageResponse.data.yoast_meta.forEach(element => {
-			let firstValue = element[Object.keys(element)[0]];
-			element['hid'] = firstValue
-		});
+					pageData.yoast_meta.forEach(element => {
+						let firstValue = element[Object.keys(element)[0]];
+						element['hid'] = firstValue
+					});
 
-		return {
-			page: pageResponse.data,
-			careers: caerresResponse.data
-		}
-
+					return {
+						page: pageData,
+						structuredData: {
+							"@context" : "http://schema.org",
+							"@type" : "Article",
+							"name" : pageData.title.rendered,
+							"headline": pageData.title.rendered,
+							"author" : {
+								"@type" : "Person",
+								"name" : "Project M Plus",
+								"url":pageData.link
+							},
+							"creator":[
+								"Project M Plus"
+							],
+							"mainEntityOfPage": {
+								"@type": "WebPage",
+								"@id": pageData.link
+							},
+							"publisher" : {
+								"@type" : "Organization",
+								"name" : "Project M PLus"
+							},
+							"datePublished": pageData.modified,
+							"dateCreated": pageData.modified,
+							"dateModified": pageData.modified
+							// More structured data...
+						}
+					}
+				})
+				.catch(function (error) {
+					console.log(error);
+				})
 	}
 };
 </script>

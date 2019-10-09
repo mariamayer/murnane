@@ -72,109 +72,86 @@ export default {
 			formFields: '',
 			input_values: {
 			},
-			showForm: true
+			showForm: true,
+			page: ''
 		}
 	},
-	destroyed() {
-
+	mounted() {
+		let self = this;
+		axios.get('/load-form/',{
+			withCredentials: true
+		})
+			.then(function (response) {
+				// handle success
+				// console.log(response);
+				self.formFields = response.data
+			})
+			.catch(function (error) {
+				// handle error
+				console.log(error);
+			})
+			.finally(function () {
+				// always executed
+			});
 	},
 	head () {
 		return {
-			title: this.page.title.rendered,
+			title: this.page.title ? this.page.title.rendered : '',
 			meta: this.page.yoast_meta,
 			__dangerouslyDisableSanitizers: ['script'],
-			script: [{
-				// innerHTML: JSON.stringify(this.structuredData),
-				innerHTML: `{
-					"@context" : "http://schema.org",
-					"@type" : "Article",
-					"name" : "${this.page.title.rendered}",
-					"headline": "${this.page.title.rendered}",
-					"author" : {
-						"@type" : "Person",
-						"name" : "Project M Plus",
-						"url":"https://projectmplus.com/"
-					},
-					"creator":[
-						"Project M Plus"
-					],
-					"mainEntityOfPage": {
-						"@type": "WebPage",
-						"@id": "https://projectmplus.com`+ this.$route.fullPath +`"
-					},
-					"publisher" : {
-						"@type" : "Organization",
-						"name" : "Project M PLus"
-					},
-					"datePublished": "${this.page.date}",
-					"dateCreated": "${this.page.date}",
-					"dateModified": "${this.page.date}"
-				}`,
-				type: 'application/ld+json'
-			}],
-			// script: [
-			// 	{ src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js' }
-			// ],
-		}
-	},
-	methods: {
-		onSubmit(evt) {
-			evt.preventDefault()
-			console.log(JSON.stringify(this.input_values))
-		},
-		onchange($event, index, id) {
-			//console.log($event);
-			this.input_values['input_'+id] = $event;
-        },
-
-		validateBeforeSubmit($el){
-			this.$validator.validateAll().then((result) => {
-				if (result) {
-
-					let self = this;
-
-					this.$axios.post('/form-submit/', self.input_values)
-						.then(function (response) {
-
-							if(response.data.is_valid === true){
-								document.getElementById('form_1_response').innerHTML += response.data.confirmation_message;
-
-								// self.$validator.reset();
-								/* Trick to reset/clear native browser form validation state */
-								// set to true if re-loading the form
-								self.showForm = false
-								// self.$nextTick(() => {
-								// })
-							}
-						})
-						.catch(function (error) {
-							if(error.response ){
-								if(error.response.data.is_valid === false ){
-									alert('Please refresh and try again');
-								}
-							}
-						});
-					// console.log('Form Submitted!');
-					return;
+			script: [{ innerHTML: JSON.stringify(this.structuredData), type: 'application/ld+json' }],
+			link: [
+				{
+					rel: "canonical",
+					href: "https://projectmplus.com/" + this.page.slug
 				}
-
-			});
+			]
 		}
 	},
 	async asyncData (context) {
+		return context.app.$axios.$get(context.app.$env.PREVIEW_URL+ API_CONFIG.basePagesUrl + '?slug=' + context.route.name)
+				.then(function (data) {
 
-		const pageResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL+ API_CONFIG.basePagesUrl + '/176');
-		const formResponse = await context.app.$axios.$get('/load-form/',{withCredentials: true,})
+					let pageData = data[0];
 
-		pageResponse.data.yoast_meta.forEach(element => {
-			let firstValue = element[Object.keys(element)[0]];
-			element['hid'] = firstValue
-		});
+					pageData.yoast_meta.forEach(element => {
+						let firstValue = element[Object.keys(element)[0]];
+						element['hid'] = firstValue
+					});
 
-		return {
-			page: pageResponse.data,
-			formFields: formResponse
-		}
+					return {
+						page: pageData,
+						structuredData: {
+							"@context" : "http://schema.org",
+							"@type" : "Article",
+							"name" : pageData.title.rendered,
+							"headline": pageData.title.rendered,
+							"author" : {
+								"@type" : "Person",
+								"name" : "Project M Plus",
+								"url":pageData.link
+							},
+							"creator":[
+								"Project M Plus"
+							],
+							"mainEntityOfPage": {
+								"@type": "WebPage",
+								"@id": pageData.link
+							},
+							"publisher" : {
+								"@type" : "Organization",
+								"name" : "Project M PLus"
+							},
+							"datePublished": pageData.modified,
+							"dateCreated": pageData.modified,
+							"dateModified": pageData.modified
+							// More structured data...
+						}
+					}
+				})
+				.catch(function (error) {
+					console.log(error);
+				})
 
 	}
 

@@ -5,6 +5,7 @@
 		<b-carousel
 			id="carousel-fade"
 			controls
+			v-if="data"
 		>
 			<b-carousel-slide
 				v-for="slide in data"

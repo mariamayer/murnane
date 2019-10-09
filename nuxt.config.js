@@ -9,6 +9,10 @@ const features = [
 
 module.exports = {
 	mode: "universal",
+	//debug: true,
+	// server: {
+	// 	port: 8000, // default: 3000
+	// },
 	/*
 	 ** Headers of the page
 	 */
@@ -33,7 +37,15 @@ module.exports = {
 				property: "og:image",
 				content: "http://projectmplus.com/wp-content/uploads/2019/09/mplus-og-image.jpg"
 			},
-			{ hid: 'robots', name: 'robots', content: 'noindex, nofollow' }
+			{
+				hid: 'og:title',
+				property: "og:title",
+				content: "Project M Plus"
+			},
+			{
+				name: 'robots',
+				content: 'noindex, nofollow'
+			}
 		],
 		link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
 		script: [
@@ -48,8 +60,8 @@ module.exports = {
 	 ** Customize the progress-bar color
 	 */
 	loading: {
-		color: "#000000",
-		height: "5px"
+		color: "#FFA500",
+		height: "8px"
 	},
 	/*
 	 ** Global CSS
@@ -61,8 +73,8 @@ module.exports = {
 	 ** Plugins to load before mounting the App
 	 */
 	plugins: [
-		{ src: `~plugins/vee-validate.js`, ssr: true },
-		{ src: "~plugins/isotope.js", ssr: false }
+		{ src: "~plugins/isotope.js", ssr: false },
+		{ src: `~plugins/vee-validate.js`, ssr: true }
 	],
 	/*
 	 ** Nuxt.js dev-modules
@@ -78,19 +90,13 @@ module.exports = {
 		"@nuxtjs/axios",
 		'@nuxtjs/sitemap',
 		'nuxt-trailingslash-module',
+		"@nuxtjs/redirect-module",
 		['nuxt-env', {
 			keys: [
 				{ key: 'PREVIEW_URL', default: process.env.BASE_URL } // Specify a default value
 			]
 		}],
 		'nuxt-webfontloader',
-		['@nuxtjs/robots',[
-				{
-					UserAgent: '*',
-					Disallow: () => '' // accepts function
-				}
-			]
-		],
 		// google analytics example
 		[
 			"@nuxtjs/google-analytics",
@@ -118,7 +124,7 @@ module.exports = {
 	/*
 	 ** Redirects example
 	 */
-	redirect: SITE_REDIRECTS,
+	// redirect: SITE_REDIRECTS,
 	/*
 	 ** Axios module configuration
 	 ** See https://axios.nuxtjs.org/options

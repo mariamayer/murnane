@@ -2,7 +2,7 @@
 	<b-container>
 		<b-row>
 			<b-col>
-				<no-ssr>
+				<client-only>
 
 					<div class="mailchimp">
 						<!-- Begin MailChimp Signup Form -->
@@ -18,7 +18,7 @@
 							</form>
 						</div>
 					</div>
-				</no-ssr>
+				</client-only>
 			</b-col>
 		</b-row>
 	</b-container>

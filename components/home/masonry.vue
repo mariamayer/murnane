@@ -6,7 +6,9 @@
 			<div id="filters" class="button-group mb-3">
 				<button class="button btn btn-primary all" @click="filter('.all')" data-filter="all">
 					All—
-					<small>({{ data.length }})</small>
+					<small
+						v-if="data"
+					>({{ data.length }})</small>
 				</button>
 				<button
 					v-for="item in tax"

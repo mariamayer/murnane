@@ -2,7 +2,7 @@ const redirects = [
 	/* Redirect option here */
 	{
 		from: "^/old-contact",
-		to: "/contact/",
+		to: "/contact",
 		statusCode: 301
 	}
 ]

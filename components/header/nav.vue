@@ -4,11 +4,11 @@
 		class="header header--main"
 	>
 
-		<nuxt-link to="/">
+		<nuxt-link to="/" aria-label="home link">
 			<img
 				src="~/assets/images/main-logo.svg"
 				class="site-logo"
-				alt="Open nav"
+				alt=""
 			>
 		</nuxt-link>
 
@@ -49,7 +49,17 @@
 					v-for="item in menuItems"
 					:key="item.ID"
 				>
-					<nuxt-link :to="'/'+ item.slug">
+					<nuxt-link
+						v-if="item.slug === '/'"
+						to="/"
+					>
+						<span @click="hideModal">
+							{{item.title}}
+						</span>
+					</nuxt-link>
+					<nuxt-link
+						:to="'/'+ item.slug"
+					>
 						<span @click="hideModal">
 							{{item.title}}
 						</span>

@@ -1,6 +1,19 @@
-# wordcamp-nuxt
+# Project M Plus
 
-> WordCamp Nuxt.js demo
+> WordCamp Nuxt.js demo with updated packages
+
+## Built With (in additional to the CLI installation)
+
+* @nuxtjs/dotenv
+* @nuxtjs/google-anatlyics
+* @nuxtjs/redirect-module
+* @nuxtjs/robots
+* @nuxtjs/sitemap
+* @sentry/.. (additional error handling)
+* nuxt-env (evn variables in code)
+* nuxt-trailingslash-module
+* vee-validate
+* more but are probably project specifics
 
 ## Build Setup
 

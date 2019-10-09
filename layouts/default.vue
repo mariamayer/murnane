@@ -17,22 +17,6 @@ export default {
 	components: {
 		MainNav,
 		MainFooter
-	},
-	beforeMount() {
-		let self = this;
-		axios.get('/newsletter-form/',{
-			withCredentials: true
-		})
-			.then(function (response) {
-				self.$store.commit('SET_FORMS', response.data);
-			})
-			.catch(function (error) {
-				// handle error
-				console.log(error);
-			})
-			.finally(function () {
-				// always executed
-			});
 	}
 }
 </script>

@@ -22,7 +22,7 @@
 		</b-container>
 
 		<!-- instagram, check if home -->
-		<no-ssr>
+		<client-only>
 			<div class="footer__instagram">
 				<ul class="instagram-list">
 					<li
@@ -34,7 +34,7 @@
 					</li>
 				</ul>
 			</div>
-		</no-ssr>
+		</client-only>
 
 		<!-- misc -->
 		<b-container

@@ -96,6 +96,6 @@ export default {
                     // console.log(e);
 					error({ statusCode: 404, message: 'Post not found' })
                 })
-        },
+        }
 }
 </script>
