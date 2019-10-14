@@ -164,14 +164,14 @@ export default {
 					"author" : {
 						"@type" : "Person",
 						"name" : "Project M Plus",
-						"url":"https://projectmplus.com/"
+						"url":"${this.$env.SITE_HOME_URL}"
 					},
 					"creator":[
 						"Project M Plus"
 					],
 					"mainEntityOfPage": {
 						"@type": "WebPage",
-						"@id": "https://projectmplus.com`+ this.$route.fullPath +`"
+						"@id": "${this.$env.SITE_HOME_URL+ this.$route.fullPath}"
 					},
 					"publisher" : {
 						"@type" : "Organization",

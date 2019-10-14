@@ -129,14 +129,14 @@ export default {
 				"author" : {
 					"@type" : "Person",
 					"name" : "Project M Plus",
-					"url":wpHome[0].link
+					"url":context.app.$env.SITE_HOME_URL
 				},
 				"creator":[
 					"Project M Plus"
 				],
 				"mainEntityOfPage": {
 					"@type": "WebPage",
-					"@id": wpHome[0].link
+					"@id": context.app.$env.SITE_HOME_URL
 				},
 				"publisher" : {
 					"@type" : "Organization",

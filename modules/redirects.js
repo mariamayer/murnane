@@ -1,8 +1,8 @@
 const redirects = [
 	/* Redirect option here */
 	{
-		from: "^/old-contact",
-		to: "/contact",
+		from: "^/wp-admin",
+		to: "https://wp.projectmplus.com",
 		statusCode: 301
 	}
 ]

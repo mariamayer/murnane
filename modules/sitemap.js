@@ -2,7 +2,7 @@ const axios = require('axios')
 const env = require('dotenv').config();
 const sitemap = {
     path: "/sitemap.xml",
-	hostname: "https://projectmplus.com",
+	hostname: process.env.HOME_URL,
 	generate: false,
 	routes () {
 		return axios.all([

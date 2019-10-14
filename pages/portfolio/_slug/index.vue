@@ -31,6 +31,8 @@ import IntroContent from '@/components/projects/introContent'
 import FlexContent from '@/components/projects/flexContent'
 import PrevNext from '@/components/projects/prevNext'
 
+import axios from 'axios'
+
 export default {
 	components:{
 		FeaturedImg,
@@ -41,6 +43,29 @@ export default {
 	data(){
 		return {
 			post: ''
+		}
+	},
+	mounted(){
+		let previewID = this.$route.query.preview_id,
+			previewNon = this.$route.query.preview_nonce,
+			self = this;
+
+		if(previewID && previewNon) {
+			axios.get(this.$env.PREVIEW_URL+'previews/v1/preview/?id='+previewID+'&_wpnonce='+previewNon,{
+				withCredentials: true
+			})
+				.then(function (response) {
+					// handle success
+					console.log(response);
+					// self.post = response
+				})
+				.catch(function (error) {
+					// handle error
+					console.log(error);
+				})
+				.finally(function () {
+					// always executed
+				});
 		}
 	},
 	head () {
@@ -58,14 +83,14 @@ export default {
 					"author" : {
 						"@type" : "Person",
 						"name" : "Project M Plus",
-						"url":"https://projectmplus.com/"
+						"url":"${this.$env.SITE_HOME_URL}"
 					},
 					"creator":[
 						"Project M Plus"
 					],
 					"mainEntityOfPage": {
 						"@type": "WebPage",
-						"@id": "https://projectmplus.com`+ this.$route.fullPath +`"
+						"@id": "${this.$env.SITE_HOME_URL+ this.$route.fullPath}"
 					},
 					"publisher" : {
 						"@type" : "Organization",

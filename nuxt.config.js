@@ -98,7 +98,8 @@ module.exports = {
 		"@nuxtjs/redirect-module",
 		['nuxt-env', {
 			keys: [
-				{ key: 'PREVIEW_URL', default: process.env.BASE_URL } // Specify a default value
+				{ key: 'PREVIEW_URL', default: process.env.BASE_URL },
+				{ key: 'SITE_HOME_URL', default: process.env.HOME_URL }
 			]
 		}],
 		'nuxt-webfontloader'
@@ -122,7 +123,7 @@ module.exports = {
 	/*
 	 ** Redirects example
 	 */
-	// redirect: SITE_REDIRECTS,
+	redirect: SITE_REDIRECTS,
 	/*
 	 ** Axios module configuration
 	 ** See https://axios.nuxtjs.org/options

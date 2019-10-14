@@ -129,14 +129,14 @@ export default {
 							"author" : {
 								"@type" : "Person",
 								"name" : "Project M Plus",
-								"url":pageData.link
+								"url":context.app.$env.SITE_HOME_URL
 							},
 							"creator":[
 								"Project M Plus"
 							],
 							"mainEntityOfPage": {
 								"@type": "WebPage",
-								"@id": pageData.link
+								"@id": context.app.$env.SITE_HOME_URL + '/contact-us'
 							},
 							"publisher" : {
 								"@type" : "Organization",
