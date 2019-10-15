@@ -11,7 +11,8 @@ export const state = () => ({
 		social: ''
 	},
 	instaDesign: '',
-	instaArchitecture: ''
+	instaArchitecture: '',
+	previewLoading: false
 })
 
 
@@ -39,6 +40,9 @@ export const mutations = {
 	SET_INSTAGRAM_A(state, payload){
 		state.instaArchitecture = payload
 	},
+	SHOW_PREVIEW_STATE(state, payload){
+		state.previewLoading = payload;
+	}
 	// SET_BASE_CLASS(state, payload){
 	// 	state.baseClass = payload
 	// },

@@ -120,13 +120,13 @@ export default {
 		},
 		updatedMenu(){
 			let currentUrl = this.$store.state.footerMenu;
-			let self = this;
-			currentUrl.forEach(element => {
-				let string = self.$env.SITE_HOME_URL;
-				let url = element.url;
-				let replacement = url.replace(string,'');
-				element['url'] = replacement;
-			});
+			// let self = this;
+			// currentUrl.forEach(element => {
+			// 	let string = self.$env.SITE_HOME_URL + '/';
+			// 	let url = element.url;
+			// 	let replacement = url.replace(string,'');
+			// 	element['url'] = replacement;
+			// });
 
 			return currentUrl;
 		},

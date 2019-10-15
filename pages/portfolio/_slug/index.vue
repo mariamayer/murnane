@@ -18,7 +18,10 @@
 		></flex-content>
 
 		<!-- pagination -->
-		<prev-next :data="post.prev_next"></prev-next>
+		<prev-next
+			v-if="post.prev_next"
+			:data="post.prev_next"
+		></prev-next>
 
 	</article>
 </template>
@@ -56,7 +59,7 @@ export default {
 			})
 				.then(function (response) {
 					// handle success
-					console.log(response);
+					self.post = response.data;
 					// self.post = response
 				})
 				.catch(function (error) {
@@ -65,8 +68,14 @@ export default {
 				})
 				.finally(function () {
 					// always executed
+					setTimeout(() => {
+						self.$store.commit('SHOW_PREVIEW_STATE', false);
+					}, 1000);
 				});
 		}
+	},
+	beforeDestroy(){
+		this.$store.commit('SHOW_PREVIEW_STATE', false);
 	},
 	head () {
 		return {
@@ -113,6 +122,9 @@ export default {
 					// 	let firstValue = element[Object.keys(element)[0]];
 					// 	element['hid'] = firstValue
 					// });
+					if(app.context.query.preview_id && app.context.query.preview_nonce){
+						app.store.commit('SHOW_PREVIEW_STATE', true)
+					}
 
                     return {
                         post: postData,
