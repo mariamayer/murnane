@@ -24,11 +24,11 @@
 					<!-- journal starts -->
 					<article
 						class="col-md-6 col-lg-4 col-12 pb-6 posts-page__post"
-						v-for="post in posts"
-						:key="post.id"
+						v-for="(post,index) in posts"
+						:key="index"
 					>
 						<a
-							:href="post.acf.external_post_link"
+							:href="post.external_link"
 							target="_blank"
 							rel="noopener noreferrer"
 							aria-hidden="true"
@@ -36,7 +36,7 @@
 						>
 							<b-img-lazy
 								v-bind="mainProps"
-								:src="post.better_featured_image.source_url"
+								:src="post.featured_img"
 								:alt="''"
 							></b-img-lazy>
 							<span
@@ -56,18 +56,18 @@
 								class="mb-4"
 							>
 								<a
-									:href="post.acf.external_post_link"
+									:href="post.external_link"
 									target="_blank"
 									rel="noopener noreferrer"
 									class="posts-page__post-link"
-									v-html="post.title.rendered"
+									v-html="post.name"
 								>
 								</a>
 							</h2>
 						</header>
 						<div
 							class="posts-page__post-copy"
-							v-html="post.content.rendered"
+							v-html="post.copy"
 						></div>
 					</article>
 				</b-row>
@@ -120,7 +120,7 @@ export default {
 
 			thisButton.setAttribute('disabled', 'true');
 			thisButton.innerHTML = 'Loading...'
-			this.$axios.get(this.$env.PREVIEW_URL + API_CONFIG.basePostsUrl + `?per_page=9&page=${this.postsPage}`)
+			this.$axios.get(this.$env.PREVIEW_URL + `rmh/v1/posts?per_page=9&page=${this.postsPage}`)
 			.then(function (response) {
 					// get total pages and add to current count
 					let totalPages = parseInt(response.headers['x-wp-totalpages']);
@@ -151,7 +151,7 @@ export default {
 	},
 	head () {
 		return {
-			title: this.page.title.rendered,
+			title: this.page.name,
 			meta: this.page.yoast_meta,
 			__dangerouslyDisableSanitizers: ['script'],
 			script: [{
@@ -183,15 +183,18 @@ export default {
 				}`,
 				type: 'application/ld+json'
 			}],
-			// script: [
-			// 	{ src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js' }
-			// ],
+			link: [
+				{
+					rel: "canonical",
+					href: "https://projectmplus.com" + this.$route.fullPath
+				}
+			]
 		}
 	},
 	async asyncData (context) {
 
 		const pageResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL+ API_CONFIG.basePagesUrl + '/609');
-		const postsResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL + API_CONFIG.basePostsUrl + '?per_page=9');
+		const postsResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL + 'rmh/v1/posts?per_page=9&page=1');
 
 		// pageResponse.data.yoast_meta.forEach(element => {
 		// 	let firstValue = element[Object.keys(element)[0]];

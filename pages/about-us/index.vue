@@ -8,12 +8,14 @@
 
 		<!-- home content block -->
 		<content-block
+			v-if="page.acf.opening_statement"
 			:data="page.acf.opening_statement"
 			:class="'about-page__intro'"
 		></content-block>
 
 		<!-- services -->
 		<services-block
+			v-if="page.acf.services_s_five"
 			:data="page.acf.services_s_five"
 		></services-block>
 
@@ -92,6 +94,31 @@ export default {
 			.finally(function () {
 				// always executed
 			});
+
+		let previewID = this.$route.query.preview_id,
+			previewNon = this.$route.query.preview_nonce;
+
+		if(previewID && previewNon) {
+			axios.get(this.$env.PREVIEW_URL+'previews/v1/preview/?id='+previewID+'&_wpnonce='+previewNon,{
+				withCredentials: true
+			})
+				.then(function (response) {
+					// handle success
+					self.page = response.data;
+					// console.log(response);
+					// self.post = response
+				})
+				.catch(function (error) {
+					// handle error
+					console.log(error);
+				})
+				.finally(function () {
+					// always executed
+					setTimeout(() => {
+						self.$store.commit('SHOW_PREVIEW_STATE', false);
+					}, 1000);
+				});
+		}
 	},
 	head () {
 		return {
@@ -117,6 +144,9 @@ export default {
 					// 	let firstValue = element[Object.keys(element)[0]];
 					// 	element['hid'] = firstValue
 					// });
+					if(context.query.preview_id && context.query.preview_nonce){
+						context.store.commit('SHOW_PREVIEW_STATE', true)
+					}
 
 					return {
 						page: pageData,

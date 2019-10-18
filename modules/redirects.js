@@ -2,7 +2,7 @@ const redirects = [
 	/* Redirect option here */
 	{
 		from: "^/wp-admin",
-		to: "https://wp.projectmplus.com",
+		to: "https://wp.projectmplus.com/wp-admin",
 		statusCode: 301
 	}
 ]

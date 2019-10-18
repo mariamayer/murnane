@@ -110,7 +110,13 @@ export default {
 					"dateModified": "${this.post.date}"
 				}`,
 				type: 'application/ld+json'
-			}]
+			}],
+			link: [
+				{
+					rel: "canonical",
+					href: "https://projectmplus.com" + this.$route.fullPath
+				}
+			]
 		}
 	},
 	asyncData({$axios,app,params, error}) {

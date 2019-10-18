@@ -57,7 +57,7 @@
 
 					<ul class="footer__menu">
 						<li
-							v-for="item in updatedMenu"
+							v-for="item in footerMenu"
 							:key="item.id"
 						>
 							<nuxt-link
@@ -117,18 +117,6 @@ export default {
 		},
 		footerMenu(){
 			return this.$store.state.footerMenu;
-		},
-		updatedMenu(){
-			let currentUrl = this.$store.state.footerMenu;
-			// let self = this;
-			// currentUrl.forEach(element => {
-			// 	let string = self.$env.SITE_HOME_URL + '/';
-			// 	let url = element.url;
-			// 	let replacement = url.replace(string,'');
-			// 	element['url'] = replacement;
-			// });
-
-			return currentUrl;
 		},
 		instaA(){
 			return this.$store.state.instaArchitecture
