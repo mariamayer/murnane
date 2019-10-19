@@ -4,14 +4,17 @@
 		>
 		<b-container
 			class="posts-page__container pb-5"
+			id="first-text"
 		>
 			<b-row>
-				<header>
-					<h1
-						v-html="page.name"
-					>
-					</h1>
-				</header>
+				<b-col>
+					<header>
+						<h1
+							v-html="page.name"
+						>
+						</h1>
+					</header>
+				</b-col>
 			</b-row>
 		</b-container>
 
@@ -24,12 +27,12 @@
 						class="project-preview project-preview--col-replacement col-md-4 col-6"
 						v-for="item in posts"
 						:key="item.id"
-						:to="'/'+item.type+'/'+item.slug"
+						:to="item.page_link"
 					>
 						<span
-							v-html="item.title.rendered"
+							v-html="item.name"
 						></span>
-						<b-img-lazy v-bind="mainProps" :src="item.better_featured_image.media_details.sizes['fs-square'] ? item.better_featured_image.media_details.sizes['fs-square'].source_url :item.better_featured_image.source_url" alt=""></b-img-lazy>
+						<b-img-lazy v-bind="mainProps" :src="item.image" alt=""></b-img-lazy>
 					</nuxt-link>
 
 				</b-row>
@@ -89,7 +92,7 @@ export default {
 
 			thisButton.setAttribute('disabled', 'true');
 			thisButton.innerHTML = 'Loading...'
-			this.$axios.get(this.$env.PREVIEW_URL + API_CONFIG.basePostsUrl + `?type[]=portfolio&type[]=architecture_project&filter[portfolio_category]=${this.$route.params.slug}&per_page=9&page=${this.postsPage}`)
+			this.$axios.get(this.$env.PREVIEW_URL + `rmh/v1/multiple_types/${this.$route.params.slug}?page=${this.postsPage}`)
 			.then(function (response) {
 					// get total pages and add to current count
 					let totalPages = parseInt(response.headers['x-wp-totalpages']);
@@ -161,7 +164,8 @@ export default {
 	async asyncData (context) {
 
 		const pageResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL+ 'wp/v2/portfolio_category?slug=' + context.params.slug);
-		const postsResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL + API_CONFIG.basePostsUrl + '?type[]=portfolio&type[]=architecture_project&filter[portfolio_category]=' + context.params.slug +'&per_page=9');
+		// const postsResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL + API_CONFIG.basePostsUrl + '?type[]=portfolio&type[]=architecture_project&filter[portfolio_category]=' + context.params.slug +'&per_page=9');
+		const postsResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL + 'rmh/v1/multiple_types/' + context.params.slug);
 
 		// console.log(postsResponse.headers['x-wp-totalpages']);
 		const totalPostPages = parseInt(postsResponse.headers['x-wp-totalpages']);

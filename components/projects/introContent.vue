@@ -3,7 +3,9 @@
 		class="single-project__intro pt-7 pb-7"
 		id="single-project-intro"
 	>
-		<b-container>
+		<b-container
+			id="first-text"
+		>
 			<b-row
 				align-h="between"
 			>
@@ -59,12 +61,15 @@
 								Categories
 							</p>
 
-							<span
+							<nuxt-link
 								v-for="item in taxonomyList"
 								:key="item.term_id"
+								:to="'/'+item.taxonomy+'/'+item.slug"
 							>
-								#{{item.name}}
-							</span>
+								<span>
+									#{{item.name}}
+								</span>
+							</nuxt-link>
 						</b-col>
 					</b-row>
 				</b-col>

@@ -17,6 +17,11 @@
 			:title="post.title.rendered"
 		></flex-content>
 
+		<!-- learn more -->
+		<learn-more
+			:setClass="'pb-4 pt-6'"
+		></learn-more>
+
 		<!-- pagination -->
 		<prev-next
 			v-if="post.prev_next"
@@ -32,6 +37,7 @@ import API_CONFIG from '@/assets/js/apiConfig.js'
 import FeaturedImg from '@/components/projects/featuredImg'
 import IntroContent from '@/components/projects/introContent'
 import FlexContent from '@/components/projects/flexContent'
+import LearnMore from '@/components/global/learnMore'
 import PrevNext from '@/components/projects/prevNext'
 
 import axios from 'axios'
@@ -41,7 +47,8 @@ export default {
 		FeaturedImg,
 		IntroContent,
 		FlexContent,
-		PrevNext
+		PrevNext,
+		LearnMore
 	},
 	data(){
 		return {

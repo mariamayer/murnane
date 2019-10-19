@@ -7,7 +7,7 @@
 				class="text-center"
 			>
 				Love what you see? <nuxt-link
-										to="contact-us"
+										to="/contact-us"
 										class="btn btn--mplus ml-4"
 									>
 										Let's talk

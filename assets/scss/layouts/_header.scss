@@ -35,6 +35,9 @@
 		line-height: 1.5;
 		transition: color .25s ease-out;
 		text-decoration: none;
+		&.nuxt-link-exact-active {
+			color: orange;
+		}
 		&:hover {
 			color: $blue;
 		}

@@ -1,11 +1,15 @@
 <template>
 	<div>
+
+		<skip-content></skip-content>
+
 		<main-nav></main-nav>
 		<main>
 			<nuxt />
 		</main>
 		<main-footer></main-footer>
 
+		<!-- todo: make into component, why you so lazy -->
 		<div
 			v-if="loadingPreview"
 			id="loading-preview"
@@ -28,12 +32,14 @@
 <script>
 import MainNav from '~/components/header/nav'
 import MainFooter from '~/components/footer/footer'
+import SkipContent from '@/components/global/skipContent'
 import axios from 'axios'
 
 export default {
 	components: {
 		MainNav,
-		MainFooter
+		MainFooter,
+		SkipContent
 	},
 	computed: {
 		loadingPreview(){

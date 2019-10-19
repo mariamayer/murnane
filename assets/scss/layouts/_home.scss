@@ -37,6 +37,11 @@
 		.carousel-control-prev,
 		.carousel-control-next {
 			z-index: 1;
+			[data-whatintent='keyboard'] & {
+				&:focus {
+					background-color: rgba($color: #000000, $alpha: .5);
+				}
+			}
 		}
 		.carousel-control-prev {
 			cursor: url(../images/Mplus-left-arrow.svg),auto!important;

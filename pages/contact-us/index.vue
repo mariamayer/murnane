@@ -3,7 +3,9 @@
 		class="contact-page pb-7 pt-7"
 	>
 
-		<b-container>
+		<b-container
+			id="first-text"
+		>
 			<b-row>
 				<b-col>
 					<header>

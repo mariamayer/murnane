@@ -4,6 +4,7 @@
 		>
 		<b-container
 			class="posts-page__container pb-5"
+			id="first-text"
 		>
 			<b-row>
 				<header>
