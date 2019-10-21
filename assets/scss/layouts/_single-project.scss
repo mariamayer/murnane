@@ -16,6 +16,9 @@
 		margin: auto;
 		cursor: pointer;
 		animation: MoveUpDown 1.5s ease-out infinite;
+		background-color: transparent;
+		appearance: none;
+		border: none;
 		@keyframes MoveUpDown {
 			0%, 100% {
 				transform: translateY(0);

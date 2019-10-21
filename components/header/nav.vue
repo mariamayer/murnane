@@ -8,6 +8,7 @@
 			<img
 				src="~/assets/images/main-logo.svg"
 				class="site-logo"
+				aria-hidden="true"
 				alt=""
 			>
 		</nuxt-link>

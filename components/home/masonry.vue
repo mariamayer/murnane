@@ -32,7 +32,7 @@
 							<span
 								v-html="item.post_title"
 							></span>
-							<b-img-lazy v-bind="mainProps" :src="item.featured_image" alt="Image 1"></b-img-lazy>
+							<b-img-lazy v-bind="mainProps" :src="item.featured_image" alt="" aria-hidden="true"></b-img-lazy>
 						</nuxt-link>
 					</div>
 				</div>

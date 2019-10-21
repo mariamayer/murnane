@@ -3,10 +3,10 @@
 		class="single-project__featured-img"
 		:style="{ backgroundImage: `url(${data._bean_hero_fullscreen_img ? data._bean_hero_fullscreen_img:data.better_featured_image.source_url})` }"
 	>
-		<span
+		<button
 			class="single-project__down-arrow"
 			@click="smoothScrollTo"
-		></span>
+		></button>
 	</section>
 </template>
 <script>
