@@ -1,53 +1,67 @@
 <template>
-	<article class="home-page">
+	<article class="home-page home-page--landing">
 
-		<intro-slider
-			v-if="page.acf.m_slider"
-			:data="page.acf.m_slider"
-		></intro-slider>
-
-		<content-block
-			:data="page.content.rendered"
-			:setClass="'home-page__intro'"
-		></content-block>
-
-		<masonry-content
-			v-if="page.acf.project_selector"
-			:tax="taxonomy"
-			:data="page.acf.project_selector"
-		></masonry-content>
-
-		<section
-			class="mb-7"
+		<b-container
+			id="first-text"
 		>
-			<mail-chimp></mail-chimp>
-		</section>
+			<b-row>
+				<b-col
+					class="home-page__col home-page__left-col"
+					md=6
+					sm=12
+				>
+					<nuxt-link
+						to="/branding"
+					>
+						<span
+							class="bg-img"
+							:style="{ backgroundImage: 'url(' + page.acf.gif_branding.url + ')' }"
+						>
+						</span>
+						<span
+							class="title title--branding"
+							v-html="page.acf.title_branding"
+						>
+						</span>
+					</nuxt-link>
+				</b-col>
+				<b-col
+					class="home-page__col home-page__right-col"
+					md=6
+					sm=12
+				>
+					<nuxt-link
+						to="/architecture-interiors"
+					>
+						<span
+							class="bg-img"
+							:style="{ backgroundImage: 'url(' + page.acf.gif_architecture.url + ')' }"
+						>
+						</span>
+						<span
+							class="title title--arch"
+							v-html="page.acf.title_architecture"
+						>
+						</span>
+					</nuxt-link>
+				</b-col>
+			</b-row>
+		</b-container>
 
 
 	</article>
 </template>
 
 <script>
-import IntroSlider from '@/components/home/slider'
-import ContentBlock from '@/components/home/content'
-import MasonryContent from '@/components/home/masonry'
-import MailChimp from '@/components/global/mailchimp'
+
 
 import API_CONFIG from '@/assets/js/apiConfig.js'
 
-import axios from 'axios'
-
 export default {
-	components: {
-		IntroSlider,
-		ContentBlock,
-		MasonryContent,
-		MailChimp
-	},
+	components: {},
 	data(){
 		return {
 			page: '',
-			taxonomy: '',
 			structuredData: ''
 		}
 	},
@@ -66,20 +80,15 @@ export default {
 		}
 	},
 	async asyncData (context) {
-		// let wpHome = await context.app.$axios.$get(context.app.$env.PREVIEW_URL+ API_CONFIG.basePagesUrl + '?slug=home');
-    	// let wpProjectCats = await context.app.$axios.$get(context.app.$env.PREVIEW_URL +'wp/v2/portfolio_category');
 
-		const wpHome = await context.app.$axios.$get(context.app.$env.PREVIEW_URL+ API_CONFIG.basePagesUrl + '?slug=home');
-		const wpProjectCats = await context.app.$axios.$get(context.app.$env.PREVIEW_URL +'wp/v2/portfolio_category');
-
+		const wpHome = await context.app.$axios.$get(context.app.$env.PREVIEW_URL+ API_CONFIG.basePagesUrl + '/3689');
 		return {
-			page: wpHome[0],
-			taxonomy: wpProjectCats,
+			page: wpHome,
 			structuredData: {
 				"@context" : "http://schema.org",
 				"@type" : "Article",
-				"name" : wpHome[0].title.rendered,
-				"headline": wpHome[0].title.rendered,
+				"name" : wpHome.title.rendered,
+				"headline": wpHome.title.rendered,
 				"author" : {
 					"@type" : "Person",
 					"name" : "Project M Plus",
@@ -97,9 +106,9 @@ export default {
 					"name" : "Project M PLus",
 					"logo" : "http://projectmplus.com/wp-content/uploads/2019/09/mplus-og-image.jpg"
 				},
-				"datePublished": wpHome[0].modified,
-				"dateCreated": wpHome[0].modified,
-				"dateModified": wpHome[0].modified,
+				"datePublished": wpHome.modified,
+				"dateCreated": wpHome.modified,
+				"dateModified": wpHome.modified,
 				"image": "http://projectmplus.com/wp-content/uploads/2019/09/mplus-og-image.jpg"
 				// More structured data...
 			}

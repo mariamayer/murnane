@@ -58,13 +58,13 @@ export const actions = {
 		const navMenu = await axios.get(this.$env.PREVIEW_URL + API_CONFIG.mainMenuUrl);
 		const footerMenu = await axios.get(this.$env.PREVIEW_URL + API_CONFIG.footerMenuUrl);
 		const acfOptionsData = await axios.get(this.$env.PREVIEW_URL + 'acf/v3/options/options');
-		const instaDesignData = await axios.get(this.$env.PREVIEW_URL + 'wp/v2/instagram_design');
-		const instaArchitectureData = await axios.get(this.$env.PREVIEW_URL + 'wp/v2/architecture_insta');
+		// const instaDesignData = await axios.get(this.$env.PREVIEW_URL + 'wp/v2/instagram_design');
+		const instaArchitectureData = await axios.get(this.$env.PREVIEW_URL + 'rmh/v1/architecture_insta');
 
 		commit('SET_MENU', navMenu.data);
 		commit('SET_FOOTER_MENU', footerMenu.data);
 		commit('SET_ACF_OPTIONS', acfOptionsData.data);
-		commit('SET_INSTAGRAM_D', instaDesignData.data);
+		// commit('SET_INSTAGRAM_D', instaDesignData.data);
 		commit('SET_INSTAGRAM_A', instaArchitectureData.data);
 
 	},

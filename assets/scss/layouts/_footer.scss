@@ -70,9 +70,14 @@
 	padding: 0;
 	overflow: hidden;
 	white-space: nowrap;
-    vertical-align: middle;
+	vertical-align: middle;
+	&__image {
+		position: relative;
+		z-index: 0;
+	}
 	li {
-		@include aspect-ratio(1,1);
+		// @include aspect-ratio(1,1);
+		position: relative;
 		list-style: none;
 		display: inline-block;
 		width: 100%;
@@ -106,6 +111,7 @@
 			position: absolute;
 			color: transparent;
 			font-size: 0;
+			color: $black;
 			&:after {
 				@include centerer;
 				color: $black;

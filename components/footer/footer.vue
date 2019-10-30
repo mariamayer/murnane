@@ -26,11 +26,19 @@
 			<div class="footer__instagram">
 				<ul class="instagram-list">
 					<li
-						v-for="(item,index) in instaA"
-						:key="index"
-						:style="{ backgroundImage: 'url(' + item.better_featured_image.source_url + ')' }"
-						v-html="item.content.rendered"
+						v-for="(item) in instaA"
+						:key="item.id"
 					>
+						<b-img-lazy
+							class="instagram-list__image"
+							v-bind="lazyLoadProps"
+							:src="item.image"
+							:alt="item.alt"
+						></b-img-lazy>
+						<span
+							v-html="item.content"
+						>
+						</span>
 					</li>
 				</ul>
 			</div>
@@ -102,7 +110,15 @@
 export default {
 	data(){
 		return {
-			footerName: ''
+			footerName: '',
+			lazyLoadProps: {
+				center: true,
+				fluidGrow: true,
+				blank: true,
+				blankColor: '#bbb',
+				width: 640,
+				height: 581,
+			}
 		}
 	},
 	computed: {
@@ -121,9 +137,9 @@ export default {
 		instaA(){
 			return this.$store.state.instaArchitecture
 		},
-		instaD(){
-			return this.$store.state.instaDesign
-		}
+		// instaD(){
+		// 	return this.$store.state.instaDesign
+		// }
 	}
 }
 </script>

@@ -58,8 +58,8 @@
 					>
 						<span
 							@click="hideModal"
+							v-html="item.title"
 						>
-							{{item.title}}
 						</span>
 					</nuxt-link>
 					<nuxt-link
@@ -68,8 +68,8 @@
 					>
 						<span
 							@click="hideModal"
+							v-html="item.title"
 						>
-							{{item.title}}
 						</span>
 					</nuxt-link>
 				</li>

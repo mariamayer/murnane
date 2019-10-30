@@ -7,7 +7,10 @@
 		<main>
 			<nuxt />
 		</main>
-		<main-footer></main-footer>
+
+		<main-footer
+			v-if="homePage"
+		></main-footer>
 
 		<!-- todo: make into component, why you so lazy -->
 		<div
@@ -44,6 +47,13 @@ export default {
 	computed: {
 		loadingPreview(){
 			return this.$store.state.previewLoading;
+		},
+		homePage(){
+			if(this.$nuxt.$route.path === '/'){
+				return false;
+			} else {
+				return true;
+			}
 		}
 	}
 }

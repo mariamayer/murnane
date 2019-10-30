@@ -23,7 +23,7 @@
 			<div id="realizations_entries" class="row grid isotope row--isotope">
 				<div class="grid-sizer"></div>
 
-				<div v-for="item in data" :key="item.id" :class="'col-md-4 col-lg-3 grid-item all ' + item.categories_string">
+				<div v-for="item in data" :key="item.id" :class="'col-md-4 grid-item all ' + item.categories_string">
 					<div class="grid-item-content">
 						<nuxt-link
 							class="grid-item-content__link"
@@ -108,9 +108,24 @@ export default {
 			// if (item === oldActive.data("filter")) {
 			// 	return;
 			// }
-			if (item === oldAData) {
+
+			if (item === '.'+oldAData) {
+				// console.log('current');
 				return;
 			}
+
+			let currentA = document.querySelector("#filters button" + item);
+
+				currentA.classList.remove('btn-default')
+				currentA.classList.add('btn-primary')
+
+				oldA.classList.remove('btn-primary')
+				oldA.classList.add('btn-default')
+
+
+				this.iso.arrange({
+					filter: item
+				});
 
 			// let currentActive = $("#filters button" + item).first();
 
@@ -118,18 +133,6 @@ export default {
 
 			// oldActive.removeClass("btn-primary").addClass("btn-default");
 
-			let currentA = document.querySelector("#filters button" + item);
-
-			currentA.classList.remove('btn-default')
-			currentA.classList.add('btn-primary')
-
-			oldA.classList.remove('btn-primary')
-			oldA.classList.add('btn-default')
-
-
-			this.iso.arrange({
-				filter: item
-			});
 		}
 	}
 };

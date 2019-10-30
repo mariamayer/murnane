@@ -150,6 +150,81 @@ main {
 	}
 }
 
+.home-page {
+	&--landing {
+		.container {
+			max-width: 100%;
+		}
+		.row {
+
+		}
+		.home-page__col {
+			a {
+				text-align: center;
+				@include centerer;
+				width: 80%;
+				height: 80%;
+				@include media-breakpoint-up(md){
+					width: 80%;
+					height: 80%;
+				}
+				&:hover,
+				&:focus {
+					.bg-img {
+						opacity: 1;
+					}
+					.title--branding {
+						color: $white;
+					}
+					.title--arch {
+						color: $black;
+					}
+				}
+			}
+			.title {
+				@include centerer;
+				@extend .h3;
+				text-transform: uppercase;
+				font-weight: bold;
+				z-index: 2;
+				transition: color .25s ease-out;
+				letter-spacing: 2px;
+				width: 100%;
+				&--branding {
+					color: $black;
+				}
+				&--arch {
+					color: $white;
+				}
+			}
+			.bg-img {
+				background-size: cover;
+				background-position: center;
+				z-index: 0;
+				position: absolute;
+				height: 100%;
+				width: 100%;
+				left: 0;
+				top: 0;
+				opacity: 0;
+				transition: opacity .25s ease-out;
+			}
+		}
+		.home-page__left-col,
+		.home-page__right-col {
+			@include min-vh;
+			@include media-breakpoint-down(sm){
+				min-height: 50vh
+			}
+		}
+		.home-page__left-col {
+			background-color: $peach;
+		}
+		.home-page__right-col {
+			background-color: #212121;
+		}
+	}
+}
 
 .loading-preview {
 	position: fixed;

@@ -21,7 +21,7 @@
 				>
 				</span>
 				<nuxt-link
-					:to="slide.url_link"
+					:to="slide.project_link ? slide.project_link.post_type + '/'+slide.project_link.post_name : slide.url_link"
 					:aria-label="slide.title"
 				>
 					<span
