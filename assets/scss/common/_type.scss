@@ -6,6 +6,14 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'mabry-light-pro';
+    src: url('../fonts/mabry-light-pro.woff2') format('woff2'),
+         url('../fonts/mabry-light-pro.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 @mixin proxima-nova-normal {
 	font-family: 'proxima-nova';
 	font-weight: 400;
@@ -21,6 +29,12 @@
 @mixin majest-medium {
 	font-family: 'majesti-medium';
 	font-weight: 400;
+    font-style: normal;
+}
+
+@mixin MABRY_LIGHT_PRO {
+	font-family: 'mabry-light-pro';
+	font-weight: normal;
     font-style: normal;
 }
 

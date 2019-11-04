@@ -163,10 +163,10 @@ main {
 				text-align: center;
 				@include centerer;
 				width: 80%;
-				height: 80%;
+				height: 70%;
 				@include media-breakpoint-up(md){
-					width: 80%;
-					height: 80%;
+					width: 70%;
+					height: 70%;
 				}
 				&:hover,
 				&:focus {
@@ -182,13 +182,12 @@ main {
 				}
 			}
 			.title {
+				@include MABRY_LIGHT_PRO;
 				@include centerer;
-				@extend .h3;
 				text-transform: uppercase;
-				font-weight: bold;
 				z-index: 2;
 				transition: color .25s ease-out;
-				letter-spacing: 2px;
+				letter-spacing: 3.5px;
 				width: 100%;
 				&--branding {
 					color: $black;

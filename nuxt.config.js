@@ -75,7 +75,8 @@ module.exports = {
 	plugins: [
 		{ src: "~plugins/isotope.js", ssr: false },
 		{ src: `~plugins/vee-validate.js`, ssr: true },
-		{ src: `~plugins/what-input.js`, ssr: true }
+		{ src: `~plugins/what-input.js`, ssr: true },
+		{ src: `~plugins/sentry.js`, ssr: false }
 	],
 	/*
 	 ** Nuxt.js dev-modules
@@ -139,6 +140,25 @@ module.exports = {
 		/*
 		 ** You can extend webpack config here
 		 */
-		extend(config, ctx) {}
+		extend(config, ctx) {
+			if (process.env.NODE_ENV !== 'production') {
+				config.devtool = '#source-map';
+			}
+			// if (ctx.isDev && ctx.isClient) {
+			// 	config.module.rules.push({
+			// 		enforce: 'pre',
+			// 		test: /\.(js|vue)$/,
+			// 		loader: 'eslint-loader',
+			// 		exclude: /(node_modules)/,
+			// 	});
+			// }
+			if (
+				config.optimization.splitChunks &&
+				typeof config.optimization.splitChunks === 'object'
+			) {
+				// config.optimization.splitChunks.maxSize = 650000;
+				config.optimization.splitChunks.maxSize = 900000;
+			}
+		}
 	}
 };
