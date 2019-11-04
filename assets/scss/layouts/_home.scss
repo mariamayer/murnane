@@ -4,8 +4,15 @@
 		h1 {
 			@extend .mb-100;
 		}
+		h2 {
+			font-size: 30px;
+			line-height: 1.25;
+		}
 		.container {
 			margin: 0;
+			@include media-breakpoint-up(md){
+				margin-left: 30px;
+			}
 		}
 	}
 
