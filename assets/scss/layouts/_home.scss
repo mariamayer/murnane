@@ -11,7 +11,7 @@
 		.container {
 			margin: 0;
 			@include media-breakpoint-up(md){
-				margin-left: 30px;
+				margin-left: 15px;
 			}
 		}
 	}
@@ -64,7 +64,10 @@
 	&__slider-text {
 		position: absolute;
 		bottom: 30px;
-		left: 30px;
+		left: 15px;
+		@include media-breakpoint-up(md){
+			left: 30px;
+		}
 	}
 	&__slider-white {
 		color: $white;
@@ -121,6 +124,9 @@
 
 	.button-group {
 		padding-top: 3px;
+		@include media-breakpoint-up(md){
+			margin-left: 15px;
+		}
 		.button {
 			border: none;
 			border-radius: 0;
