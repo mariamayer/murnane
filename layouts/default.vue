@@ -55,6 +55,9 @@ export default {
 				return true;
 			}
 		}
+	},
+	mounted(){
+		console.log('%cDevelopment by FancySquares.blog', 'font-size:12px;color:red');
 	}
 }
 </script>
