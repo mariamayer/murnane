@@ -12,23 +12,8 @@
 			v-if="homePage"
 		></main-footer>
 
-		<!-- todo: make into component, why you so lazy -->
-		<div
-			v-if="loadingPreview"
-			id="loading-preview"
-			class="loading-preview"
-		>
-			<div
-				class="loading-preview__content"
-			>
-				<span
-					class="h1"
-				>
-					Loading Preview
-				</span>
-				<div class="lds-ripple"><div></div><div></div></div>
-			</div>
-		</div>
+		<!-- load preview content -->
+		<loading-preview></loading-preview>
 	</div>
 </template>
 
@@ -36,13 +21,15 @@
 import MainNav from '~/components/header/nav'
 import MainFooter from '~/components/footer/footer'
 import SkipContent from '@/components/global/skipContent'
+import LoadingPreview from '@/components/global/loadingPreview'
 import axios from 'axios'
 
 export default {
 	components: {
 		MainNav,
 		MainFooter,
-		SkipContent
+		SkipContent,
+		LoadingPreview
 	},
 	computed: {
 		loadingPreview(){
