@@ -104,12 +104,12 @@ export default {
 				"publisher" : {
 					"@type" : "Organization",
 					"name" : "Project M PLus",
-					"logo" : "http://projectmplus.com/wp-content/uploads/2019/09/mplus-og-image.jpg"
+					"logo" : "https://wp.projectmplus.com/wp-content/uploads/2019/12/mplus-og-image.jpg"
 				},
 				"datePublished": wpHome.modified,
 				"dateCreated": wpHome.modified,
 				"dateModified": wpHome.modified,
-				"image": "http://projectmplus.com/wp-content/uploads/2019/09/mplus-og-image.jpg"
+				"image": "https://wp.projectmplus.com/wp-content/uploads/2019/12/mplus-og-image.jpg"
 				// More structured data...
 			}
 		}

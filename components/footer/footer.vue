@@ -2,7 +2,7 @@
 	<footer
 		class="footer"
 	>
-		<!-- check if home -->
+		<!-- check if branding -->
 		<b-container
 			class="footer__link-container"
 		>
@@ -11,20 +11,51 @@
 					class="text-center"
 				>
 					<a
+						v-if="isBrandingPages"
+						href="https://www.instagram.com/mplus.studio/"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Follow @mplus.studio
+					</a>
+					<a
+						v-else
 						href="https://www.instagram.com/projectmplus/"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
 						Follow @projectmplus
 					</a>
+
 				</b-col>
 			</b-row>
 		</b-container>
 
-		<!-- instagram, check if home -->
+
 		<client-only>
 			<div class="footer__instagram">
-				<ul class="instagram-list">
+				<ul class="instagram-list"
+					v-if="isBrandingPages"
+				>
+					<li
+						v-for="(item) in instaB"
+						:key="item.id"
+					>
+						<b-img-lazy
+							class="instagram-list__image"
+							v-bind="lazyLoadProps"
+							:src="item.image"
+							:alt="item.alt"
+						></b-img-lazy>
+						<span
+							v-html="item.content"
+						>
+						</span>
+					</li>
+				</ul>
+				<ul class="instagram-list"
+					v-else
+				>
 					<li
 						v-for="(item) in instaA"
 						:key="item.id"
@@ -137,6 +168,12 @@ export default {
 		instaA(){
 			return this.$store.state.instaArchitecture
 		},
+		instaB(){
+			return this.$store.state.instaDesign
+		},
+		isBrandingPages(){
+			return this.$store.state.isBranding
+		}
 		// instaD(){
 		// 	return this.$store.state.instaDesign
 		// }

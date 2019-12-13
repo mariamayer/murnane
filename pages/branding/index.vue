@@ -70,7 +70,7 @@ export default {
     	// let wpProjectCats = await context.app.$axios.$get(context.app.$env.PREVIEW_URL +'wp/v2/portfolio_category');
 
 		const wpBranding = await context.app.$axios.$get(context.app.$env.PREVIEW_URL+ API_CONFIG.basePagesUrl + '?slug=' + context.route.name);
-
+		context.app.store.commit('SHOW_BRANDING_INSTA', true);
 		return {
 			page: wpBranding[0],
 			structuredData: {
@@ -93,12 +93,12 @@ export default {
 				"publisher" : {
 					"@type" : "Organization",
 					"name" : "Project M PLus",
-					"logo" : "http://projectmplus.com/wp-content/uploads/2019/09/mplus-og-image.jpg"
+					"logo" : "https://wp.projectmplus.com/wp-content/uploads/2019/12/mplus-og-image.jpg"
 				},
 				"datePublished": wpBranding[0].modified,
 				"dateCreated": wpBranding[0].modified,
 				"dateModified": wpBranding[0].modified,
-				"image": "http://projectmplus.com/wp-content/uploads/2019/09/mplus-og-image.jpg"
+				"image": "https://wp.projectmplus.com/wp-content/uploads/2019/12/mplus-og-image.jpg"
 				// More structured data...
 			}
 		}

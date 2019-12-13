@@ -26,6 +26,7 @@ main {
 	}
 	&__post-link {
 		color: $black;
+		line-height: 1.1;
 		&:hover,
 		&:focus {
 			color: $blue;
@@ -175,9 +176,11 @@ main {
 					}
 					.title--branding {
 						color: $white;
+						opacity: 0;
 					}
 					.title--arch {
 						color: $black;
+						opacity: 0;
 					}
 				}
 			}
@@ -186,7 +189,7 @@ main {
 				@include centerer;
 				text-transform: uppercase;
 				z-index: 2;
-				transition: color .25s ease-out;
+				transition: color .25s ease-out, opacity .25s ease-out;
 				letter-spacing: 3.5px;
 				width: 100%;
 				&--branding {

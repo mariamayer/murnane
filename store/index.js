@@ -12,7 +12,9 @@ export const state = () => ({
 	},
 	instaDesign: '',
 	instaArchitecture: '',
-	previewLoading: false
+	previewLoading: false,
+	isBranding: false,
+	isHome: false
 })
 
 
@@ -42,6 +44,12 @@ export const mutations = {
 	},
 	SHOW_PREVIEW_STATE(state, payload){
 		state.previewLoading = payload;
+	},
+	SHOW_BRANDING_INSTA(state, payload){
+		state.isBranding = payload;
+	},
+	SET_HOME_CLASS(state, payload){
+		state.isHome = payload;
 	}
 	// SET_BASE_CLASS(state, payload){
 	// 	state.baseClass = payload
@@ -58,13 +66,13 @@ export const actions = {
 		const navMenu = await axios.get(this.$env.PREVIEW_URL + API_CONFIG.mainMenuUrl);
 		const footerMenu = await axios.get(this.$env.PREVIEW_URL + API_CONFIG.footerMenuUrl);
 		const acfOptionsData = await axios.get(this.$env.PREVIEW_URL + 'acf/v3/options/options');
-		// const instaDesignData = await axios.get(this.$env.PREVIEW_URL + 'wp/v2/instagram_design');
+		const instaDesignData = await axios.get(this.$env.PREVIEW_URL + 'rmh/v1/instagram_design');
 		const instaArchitectureData = await axios.get(this.$env.PREVIEW_URL + 'rmh/v1/architecture_insta');
 
 		commit('SET_MENU', navMenu.data);
 		commit('SET_FOOTER_MENU', footerMenu.data);
 		commit('SET_ACF_OPTIONS', acfOptionsData.data);
-		// commit('SET_INSTAGRAM_D', instaDesignData.data);
+		commit('SET_INSTAGRAM_D', instaDesignData.data);
 		commit('SET_INSTAGRAM_A', instaArchitectureData.data);
 
 	},

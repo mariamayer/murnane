@@ -201,7 +201,7 @@ export default {
 		// 	let firstValue = element[Object.keys(element)[0]];
 		// 	element['hid'] = firstValue
 		// });
-
+		context.app.store.commit('SHOW_BRANDING_INSTA', false);
 		return {
 			page: pageResponse.data,
 			posts: postsResponse.data

@@ -36,7 +36,8 @@
 		transition: color .25s ease-out;
 		text-decoration: none;
 		&.nuxt-link-exact-active {
-			color: orange;
+			// color: orange;
+			color: $blue;
 		}
 		&:hover {
 			color: $blue;
@@ -69,11 +70,29 @@
 		border: none;
 		float: right;
 		border: none;
-		&:hover,
 		&:focus {
+			background-color: transparent;
+			border: none;
+			box-shadow: none;
+		}
+		.change-nav-button & {
+			&:hover {
+				@include media-breakpoint-up(md) {
+					background-color: $black;
+				}
+			}
+		}
+		&:hover {
 			background-color: $white;
 			border: none;
 			box-shadow: none;
+		}
+		[data-whatintent='keyboard'] & {
+			&:focus {
+				background-color: $white;
+				border: none;
+				box-shadow: none;
+			}
 		}
 		span {
 			background: $black;
@@ -83,6 +102,11 @@
 			margin-bottom: 5px;
 			position: relative;
 			z-index: 1;
+			.change-nav-button & {
+				@include media-breakpoint-up(md) {
+					background: $white;
+				}
+			}
 			&:last-child {
 				margin-bottom: 0;
 			}

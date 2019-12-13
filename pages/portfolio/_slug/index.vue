@@ -135,6 +135,7 @@ export default {
 					// 	let firstValue = element[Object.keys(element)[0]];
 					// 	element['hid'] = firstValue
 					// });
+					app.store.commit('SHOW_BRANDING_INSTA', true);
 					if(app.context.query.preview_id && app.context.query.preview_nonce){
 						app.store.commit('SHOW_PREVIEW_STATE', true)
 					}

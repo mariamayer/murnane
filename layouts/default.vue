@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div :class="{'change-nav-button': homePage === false}">
 
 		<skip-content></skip-content>
 

@@ -35,16 +35,12 @@ module.exports = {
 			{
 				hid: 'og:image',
 				property: "og:image",
-				content: "http://projectmplus.com/wp-content/uploads/2019/09/mplus-og-image.jpg"
+				content: "https://wp.projectmplus.com/wp-content/uploads/2019/12/mplus-og-image.jpg"
 			},
 			{
 				hid: 'og:title',
 				property: "og:title",
 				content: "Project M Plus"
-			},
-			{
-				name: 'robots',
-				content: 'noindex, nofollow'
 			}
 		],
 		link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
@@ -60,7 +56,7 @@ module.exports = {
 	 ** Customize the progress-bar color
 	 */
 	loading: {
-		color: "#FFA500",
+		color: "#212121",
 		height: "8px"
 	},
 	/*
