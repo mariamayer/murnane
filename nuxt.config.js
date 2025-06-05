@@ -20,7 +20,8 @@ module.exports = {
 		htmlAttrs: {
 			lang: 'en-US',
 		},
-		title: process.env.npm_package_name || "",
+		title: 'Studio Murnane',
+		titleTemplate: '%s – Brand, Architecture, and Interior Design',
 		meta: [
 			{ charset: "utf-8" },
 			{
@@ -28,28 +29,55 @@ module.exports = {
 				content: "width=device-width, initial-scale=1"
 			},
 			{
-				hid: "description",
-				name: "description",
-				content: process.env.npm_package_description || ""
-			},
-			{
 				hid: 'og:image',
 				property: "og:image",
-				content: "https://wp.projectmplus.com/wp-content/uploads/2019/12/mplus-og-image.jpg"
+				content: "https://wp.projectmplus.com/wp-content/uploads/2024/04/cropped-StudioMurnane_Favicon.jpeg"
 			},
 			{
 				hid: 'og:title',
 				property: "og:title",
-				content: "Project M Plus"
+				content: "Studio Murnane"
 			}
 		],
-		link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
+		link: [{ rel: "icon", type: "image/jpg", href: "https://wp.projectmplus.com/wp-content/uploads/2024/04/cropped-StudioMurnane_Favicon.jpeg" },
+			{ rel: "stylesheet", href: "https://use.typekit.net/dqk4qab.css" }],
 		script: [
 			{
 				src: `https://polyfill.io/v3/polyfill.min.js?features=${features}`,
 				body: true,
 				type: "text/javascript"
 			},
+			{
+				hid: 'fb-pixel',
+				innerHTML: `!function(f,b,e,v,n,t,s)
+				{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+				n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+				if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+				n.queue=[];t=b.createElement(e);t.async=!0;
+				t.src=v;s=b.getElementsByTagName(e)[0];
+				s.parentNode.insertBefore(t,s)}(window, document,'script',
+				'https://connect.facebook.net/en_US/fbevents.js');
+				fbq('init', '1098142239018489');
+				fbq('track', 'PageView');`,
+				type: 'text/javascript',
+				charset: 'utf-8'
+			},
+			{
+				src: 'https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=VnVavY',
+				async: true,
+				type: 'text/javascript'
+			}
+		],
+		__dangerouslyDisableSanitizersByTagID: {
+			'fb-pixel': ['innerHTML']
+		},
+		noscript: [
+			{
+				hid: 'fb-pixel-noscript',
+				innerHTML: `<img height="1" width="1" style="display:none"
+				src="https://www.facebook.com/tr?id=1098142239018489&ev=PageView&noscript=1"
+				/>`
+			}
 		]
 	},
 	/*
@@ -110,7 +138,7 @@ module.exports = {
 	 */
 	webfontloader: {
 		typekit: {
-			id: 'soa4xnj'
+			id: 'dqk4qab'
 		}
 	},
 	/*

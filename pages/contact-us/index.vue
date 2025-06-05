@@ -8,12 +8,7 @@
 		>
 			<b-row>
 				<b-col>
-					<header>
-						<h1
-							v-html="page.title.rendered"
-						>
-						</h1>
-					</header>
+					<animated-title :title="page.title.rendered"></animated-title>
 				</b-col>
 			</b-row>
 
@@ -46,6 +41,11 @@
 				</b-col>
 			</b-row>
 		</b-container>
+		<cta-section cta-title="Book a Free Consult"
+			button-url="https://calendly.com/josh-studiomurnane/30min?back=1month=2025-03"
+			button-text="Architecture + Interiors"
+			button2-url="https://calendly.com/cleo-studiomurnane/brand-consult-studio-murnane?month=2025-03"
+			button2-text="Brand Development" set-class="left pt-7" />
 	</article>
 </template>
 
@@ -62,11 +62,15 @@
 import GravityForm from '@/components/forms/gravity-form'
 import API_CONFIG from '@/assets/js/apiConfig.js'
 import axios from 'axios'
+import CtaSection from '@/components/global/ctaSection'
+import AnimatedTitle from '@/components/global/AnimatedTitle.vue'
 // const consola = require('consola')
 
 export default {
 	components: {
-		GravityForm
+		GravityForm,
+		CtaSection,
+		AnimatedTitle
 	},
 	data(){
 		return {
@@ -105,7 +109,7 @@ export default {
 			link: [
 				{
 					rel: "canonical",
-					href: "https://projectmplus.com/" + this.page.slug
+					href: "https://studiomurnane.com/" + this.page.slug
 				}
 			]
 		}
@@ -130,11 +134,11 @@ export default {
 							"headline": pageData.title.rendered,
 							"author" : {
 								"@type" : "Person",
-								"name" : "Project M Plus",
+								"name" : "Studio Murnane",
 								"url":context.app.$env.SITE_HOME_URL
 							},
 							"creator":[
-								"Project M Plus"
+								"Studio Murnane"
 							],
 							"mainEntityOfPage": {
 								"@type": "WebPage",
@@ -142,7 +146,7 @@ export default {
 							},
 							"publisher" : {
 								"@type" : "Organization",
-								"name" : "Project M PLus"
+								"name" : "Studio Murnane"
 							},
 							"datePublished": pageData.modified,
 							"dateCreated": pageData.modified,

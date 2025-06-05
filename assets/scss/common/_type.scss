@@ -7,6 +7,14 @@
 }
 
 @font-face {
+    font-family: 'ivarfine-light';
+    src: url('../fonts/IvarFine-Light.woff2') format('woff2'),
+        url('../fonts/IvarFine-Light.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
     font-family: 'mabry-light-pro';
     src: url('../fonts/mabry-light-pro.woff2') format('woff2'),
          url('../fonts/mabry-light-pro.woff') format('woff');
@@ -32,6 +40,36 @@
     font-style: normal;
 }
 
+@mixin ivarfine-light {
+	font-family: 'ivarfine-light';
+	font-weight: 400;
+    font-style: normal;
+}
+
+@mixin indivisible-regular {
+    font-family: "indivisible", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@mixin indivisible-regular-italic {
+    font-family: "indivisible", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+@mixin indivisible-medium {
+    font-family: "indivisible", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+@mixin indivisible-medium-italic {
+    font-family: "indivisible", sans-serif;
+    font-weight: 500;
+    font-style: italic;
+}
+
 @mixin MABRY_LIGHT_PRO {
 	font-family: 'mabry-light-pro';
 	font-weight: normal;
@@ -40,7 +78,7 @@
 
 h1,
 .h1 {
-	@include majest-medium();
+	@include ivarfine-light;
 	line-height: 1.2;
 	font-size: 52px;
 	color: #2a2e31;
@@ -48,18 +86,18 @@ h1,
 
 h2,
 .h2 {
-	@include proxima-nova-light();
+	@include indivisible-regular();
 	letter-spacing: 0.575px;
 	line-height: 29.9px;
 }
 
 .h3 {
-	@include proxima-nova-light();
+	@include indivisible-regular();
 	font-size: 18px;
 	letter-spacing: .8px;
 }
 
 
 body {
-	@include proxima-nova-light();
+	@include indivisible-regular();
 }

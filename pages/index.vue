@@ -13,11 +13,12 @@
 					<nuxt-link
 						to="/branding"
 					>
-						<span
-							class="bg-img"
-							:style="{ backgroundImage: 'url(' + page.acf.gif_branding.url + ')' }"
-						>
-						</span>
+						<div class="bg-img-container">
+							<div 
+								class="bg-img"
+								:style="{ backgroundImage: 'url(' + currentBrandingImage + ')' }"
+							></div>
+						</div>
 						<span
 							class="title title--branding"
 							v-html="page.acf.title_branding"
@@ -33,11 +34,12 @@
 					<nuxt-link
 						to="/architecture-interiors"
 					>
-						<span
-							class="bg-img"
-							:style="{ backgroundImage: 'url(' + page.acf.gif_architecture.url + ')' }"
-						>
-						</span>
+						<div class="bg-img-container">
+							<div 
+								class="bg-img"
+								:style="{ backgroundImage: 'url(' + currentArchitectureImage + ')' }"
+							></div>
+						</div>
 						<span
 							class="title title--arch"
 							v-html="page.acf.title_architecture"
@@ -62,26 +64,129 @@ export default {
 	data(){
 		return {
 			page: '',
-			structuredData: ''
+			structuredData: '',
+			currentBrandingImage: '',
+			currentArchitectureImage: '',
+			brandingImageIndex: 0,
+			architectureImageIndex: 0,
+			transitionInterval: 2000,
+		}
+	},
+
+	watch: {
+		// Add a watcher to see when page data changes
+		'page.acf': {
+			handler(newVal) {
+				console.log('ACF data changed:', newVal);
+				if (newVal && newVal.branding_images) {
+					console.log('Branding images found:', newVal.branding_images);
+					this.initializeImages();
+				}
+			},
+			immediate: true
+		}
+	},
+
+	mounted() {
+		console.log('Component mounted');
+		console.log('Page data at mount:', this.page);
+		this.initializeImages();
+		this.startSlideshow();
+	},
+
+	beforeDestroy() {
+		// Clean up intervals when component is destroyed
+		if (this.brandingInterval) clearInterval(this.brandingInterval)
+		if (this.architectureInterval) clearInterval(this.architectureInterval)
+	},
+	methods: {
+		initializeImages() {
+			console.log('Initializing images...');
+			console.log('Current page data:', this.page);
+			console.log('Current ACF data:', this.page.acf);
+			
+			// Initialize the first images
+			const brandingImages = this.page.acf && this.page.acf.branding_images;
+			const architectureImages = this.page.acf && this.page.acf.architecture_images;
+
+			if (brandingImages && brandingImages.length > 0) {
+				console.log('Setting initial branding image');
+				this.currentBrandingImage = brandingImages[0].url;
+			}
+			
+			if (architectureImages && architectureImages.length > 0) {
+				console.log('Setting initial architecture image');
+				this.currentArchitectureImage = architectureImages[0].url;
+			}
+		},
+		startSlideshow() {
+			console.log('Starting slideshow...');
+			console.log('Current branding images:', this.page.acf.branding_images);
+			
+			// Branding images slideshow - starts immediately
+			this.brandingInterval = setInterval(() => {
+				const brandingImages = this.page.acf && this.page.acf.branding_images;
+				if (brandingImages && brandingImages.length > 0) {
+					this.brandingImageIndex = (this.brandingImageIndex + 1) % brandingImages.length;
+					this.currentBrandingImage = brandingImages[this.brandingImageIndex].url;
+				}
+			}, this.transitionInterval);
+
+			// Architecture images slideshow - starts after 1 second delay
+			setTimeout(() => {
+				this.architectureInterval = setInterval(() => {
+					const architectureImages = this.page.acf && this.page.acf.architecture_images;
+					if (architectureImages && architectureImages.length > 0) {
+						this.architectureImageIndex = (this.architectureImageIndex + 1) % architectureImages.length;
+						this.currentArchitectureImage = architectureImages[this.architectureImageIndex].url;
+					}
+				}, this.transitionInterval);
+			}, 1000); // 1 second delay
 		}
 	},
 	head () {
 		return {
-			title: this.page.title ? this.page.title.rendered : '',
-			meta: this.page.yoast_meta,
+			title: 'Studio Murnane',
+			meta: [
+				{
+					hid: 'description',
+					name: 'description',
+					content: 'We are Studio Murnane, a multi-disciplinary design firm in Los Angeles specializing in brand development, architecture, and interior design.'
+				},
+				{
+					hid: 'og:description',
+					property: 'og:description',
+					content: 'We are Studio Murnane, a multi-disciplinary design firm in Los Angeles specializing in brand development, architecture, and interior design.'
+				},
+				...(this.page.yoast_meta || []).filter(meta => 
+					meta.name !== 'description' && 
+					meta.property !== 'og:description'
+				)
+			],
 			__dangerouslyDisableSanitizers: ['script'],
 			script: [{ innerHTML: JSON.stringify(this.structuredData), type: 'application/ld+json' }],
 			link: [
 				{
 					rel: "canonical",
-					href: "https://projectmplus.com"
+					href: "https://studiomurnane.com"
 				}
 			]
 		}
 	},
 	async asyncData (context) {
-
 		const wpHome = await context.app.$axios.$get(context.app.$env.PREVIEW_URL+ API_CONFIG.basePagesUrl + '/3689');
+		
+		// Detailed logging of the response structure
+		console.log('Full API Response:', wpHome);
+		console.log('ACF Data:', wpHome.acf);
+		console.log('All ACF fields:', Object.keys(wpHome.acf || {}));
+		
+		// Let's see the exact structure of the branding images field
+		if (wpHome.acf) {
+			console.log('Branding images field:', wpHome.acf.branding_images);
+			console.log('Field type:', typeof wpHome.acf.branding_images);
+		}
+
 		return {
 			page: wpHome,
 			structuredData: {
@@ -91,11 +196,11 @@ export default {
 				"headline": wpHome.title.rendered,
 				"author" : {
 					"@type" : "Person",
-					"name" : "Project M Plus",
+					"name" : "Studio Murnane",
 					"url":context.app.$env.SITE_HOME_URL
 				},
 				"creator":[
-					"Project M Plus"
+					"Studio Murnane"
 				],
 				"mainEntityOfPage": {
 					"@type": "WebPage",
@@ -103,7 +208,7 @@ export default {
 				},
 				"publisher" : {
 					"@type" : "Organization",
-					"name" : "Project M PLus",
+					"name" : "Studio Murnane",
 					"logo" : "https://wp.projectmplus.com/wp-content/uploads/2019/12/mplus-og-image.jpg"
 				},
 				"datePublished": wpHome.modified,
@@ -113,7 +218,6 @@ export default {
 				// More structured data...
 			}
 		}
-
 	}
 };
 </script>

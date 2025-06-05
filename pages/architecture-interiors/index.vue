@@ -17,6 +17,8 @@
 			:data="page.acf.project_selector"
 		></masonry-content>
 
+		<cta-section set-class="pb-7" button-url="https://calendly.com/josh-studiomurnane"></cta-section>
+
 		<section
 			class="mb-7"
 		>
@@ -32,7 +34,7 @@ import IntroSlider from '@/components/home/slider'
 import ContentBlock from '@/components/home/content'
 import MasonryContent from '@/components/home/masonry'
 import MailChimp from '@/components/global/mailchimp'
-
+import CtaSection from '@/components/global/ctaSection'
 import API_CONFIG from '@/assets/js/apiConfig.js'
 
 import axios from 'axios'
@@ -42,7 +44,8 @@ export default {
 		IntroSlider,
 		ContentBlock,
 		MasonryContent,
-		MailChimp
+		MailChimp,
+		CtaSection
 	},
 	data(){
 		return {
@@ -60,7 +63,7 @@ export default {
 			link: [
 				{
 					rel: "canonical",
-					href: "https://projectmplus.com/architecture-interiors"
+					href: "https://studiomurnane.com/architecture-interiors"
 				}
 			]
 		}
@@ -80,11 +83,11 @@ export default {
 				"headline": wpArch[0].title.rendered,
 				"author" : {
 					"@type" : "Person",
-					"name" : "Project M Plus",
+					"name" : "Studio Murnane",
 					"url":context.app.$env.SITE_HOME_URL
 				},
 				"creator":[
-					"Project M Plus"
+					"Studio Murnane"
 				],
 				"mainEntityOfPage": {
 					"@type": "WebPage",
@@ -92,7 +95,7 @@ export default {
 				},
 				"publisher" : {
 					"@type" : "Organization",
-					"name" : "Project M PLus",
+					"name" : "Studio Murnane",
 					"logo" : "https://wp.projectmplus.com/wp-content/uploads/2019/12/mplus-og-image.jpg"
 				},
 				"datePublished": wpArch[0].modified,

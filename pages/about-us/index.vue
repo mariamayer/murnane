@@ -1,50 +1,32 @@
 <template>
 	<article class="about-page">
 		<!-- home slider -->
-		<intro-slider
-			v-if="page.acf.m_slider"
-			:data="page.acf.m_slider"
-		></intro-slider>
+		<intro-slider v-if="page.acf.m_slider" :data="page.acf.m_slider"></intro-slider>
 
 		<!-- home content block -->
-		<content-block
-			v-if="page.acf.opening_statement"
-			:data="page.acf.opening_statement"
-			:class="'about-page__intro'"
-		></content-block>
+		<content-block v-if="page.acf.opening_statement" :data="page.acf.opening_statement"
+			:class="'about-page__intro'"></content-block>
 
 		<!-- services -->
-		<services-block
-			v-if="page.acf.services_s_five"
-			:data="page.acf.services_s_five"
-		></services-block>
+		<services-block v-if="page.acf.services_s_five" :data="page.acf.services_s_five"></services-block>
 
 		<!-- staff -->
-		<staff-content
-			v-if="page.acf.principles"
-			:leadership="page.acf.principles"
-			:employees="page.acf.company_staff"
-		></staff-content>
+		<staff-content v-if="page.acf.principles" :leadership="page.acf.principles"
+			:employees="page.acf.company_staff"></staff-content>
 
 		<!-- clients -->
-		<clients-content
-			v-if="page.acf.client_list_s_nine"
-			:clientsTitle="page.acf.title_s_nine"
-			:clients="page.acf.client_list_s_nine"
-		></clients-content>
+		<clients-content v-if="page.acf.client_list_s_nine" :clientsTitle="page.acf.title_s_nine"
+			:clients="page.acf.client_list_s_nine"></clients-content>
 
-		<!-- learn more -->
-		<learn-more
-			:setClass="'pb-7'"
-		></learn-more>
+		<cta-section cta-title="Love What you See?<br>Book a Free Consult"
+			button-url="https://calendly.com/josh-studiomurnane/30min?back=1month=2025-03"
+			button-text="Architecture + Interiors"
+			button2-url="https://calendly.com/cleo-studiomurnane/brand-consult-studio-murnane?month=2025-03"
+			button2-text="Brand Development" set-class="pb-7" />
 
 		<!-- careers -->
-		<careers-content
-			:sectionTitle="page.acf.title_careers"
-			:sectionLocation="page.acf.location_careers"
-			:sectionContent="page.acf.description_careers"
-			:currentJobs="careers"
-		></careers-content>
+		<careers-content :sectionTitle="page.acf.title_careers" :sectionLocation="page.acf.location_careers"
+			:sectionContent="page.acf.description_careers" :currentJobs="careers"></careers-content>
 
 	</article>
 </template>
@@ -57,7 +39,7 @@ import StaffContent from '@/components/about/staff'
 import ClientsContent from '@/components/about/clients'
 import LearnMore from '@/components/global/learnMore'
 import CareersContent from '@/components/about/careers'
-
+import CtaSection from '@/components/global/ctaSection'
 import API_CONFIG from '@/assets/js/apiConfig.js'
 import axios from 'axios'
 
@@ -69,9 +51,10 @@ export default {
 		StaffContent,
 		ClientsContent,
 		LearnMore,
+		CtaSection,
 		CareersContent
 	},
-	data(){
+	data() {
 		return {
 			page: '',
 			careers: ''
@@ -79,7 +62,7 @@ export default {
 	},
 	mounted() {
 		let self = this;
-		axios.get(this.$env.PREVIEW_URL+ API_CONFIG.careersUrl,{
+		axios.get(this.$env.PREVIEW_URL + API_CONFIG.careersUrl, {
 			withCredentials: true
 		})
 			.then(function (response) {
@@ -98,8 +81,8 @@ export default {
 		let previewID = this.$route.query.preview_id,
 			previewNon = this.$route.query.preview_nonce;
 
-		if(previewID && previewNon) {
-			axios.get(this.$env.PREVIEW_URL+'previews/v1/preview/?id='+previewID+'&_wpnonce='+previewNon,{
+		if (previewID && previewNon) {
+			axios.get(this.$env.PREVIEW_URL + 'previews/v1/preview/?id=' + previewID + '&_wpnonce=' + previewNon, {
 				withCredentials: true
 			})
 				.then(function (response) {
@@ -120,7 +103,7 @@ export default {
 				});
 		}
 	},
-	head () {
+	head() {
 		return {
 			title: this.page.title ? this.page.title.rendered : '',
 			meta: this.page.yoast_meta,
@@ -129,58 +112,58 @@ export default {
 			link: [
 				{
 					rel: "canonical",
-					href: "https://projectmplus.com/" + this.page.slug
+					href: "https://studiomurnane.com/" + this.page.slug
 				}
 			]
 		}
 	},
-	async asyncData (context) {
-		return context.app.$axios.$get(context.app.$env.PREVIEW_URL+ API_CONFIG.basePagesUrl + '?slug=' + context.route.name)
-				.then(function (data) {
+	async asyncData(context) {
+		return context.app.$axios.$get(context.app.$env.PREVIEW_URL + API_CONFIG.basePagesUrl + '?slug=' + context.route.name)
+			.then(function (data) {
 
-					let pageData = data[0];
+				let pageData = data[0];
 
-					// pageData.yoast_meta.forEach(element => {
-					// 	let firstValue = element[Object.keys(element)[0]];
-					// 	element['hid'] = firstValue
-					// });
-					if(context.query.preview_id && context.query.preview_nonce){
-						context.store.commit('SHOW_PREVIEW_STATE', true)
+				// pageData.yoast_meta.forEach(element => {
+				// 	let firstValue = element[Object.keys(element)[0]];
+				// 	element['hid'] = firstValue
+				// });
+				if (context.query.preview_id && context.query.preview_nonce) {
+					context.store.commit('SHOW_PREVIEW_STATE', true)
+				}
+
+				return {
+					page: pageData,
+					structuredData: {
+						"@context": "http://schema.org",
+						"@type": "Article",
+						"name": pageData.title.rendered,
+						"headline": pageData.title.rendered,
+						"author": {
+							"@type": "Person",
+							"name": "Studio Murnane",
+							"url": context.app.$env.SITE_HOME_URL
+						},
+						"creator": [
+							"Studio Murnane"
+						],
+						"mainEntityOfPage": {
+							"@type": "WebPage",
+							"@id": context.app.$env.SITE_HOME_URL + '/about-us'
+						},
+						"publisher": {
+							"@type": "Organization",
+							"name": "Studio Murnane"
+						},
+						"datePublished": pageData.modified,
+						"dateCreated": pageData.modified,
+						"dateModified": pageData.modified
+						// More structured data...
 					}
-
-					return {
-						page: pageData,
-						structuredData: {
-							"@context" : "http://schema.org",
-							"@type" : "Article",
-							"name" : pageData.title.rendered,
-							"headline": pageData.title.rendered,
-							"author" : {
-								"@type" : "Person",
-								"name" : "Project M Plus",
-								"url":context.app.$env.SITE_HOME_URL
-							},
-							"creator":[
-								"Project M Plus"
-							],
-							"mainEntityOfPage": {
-								"@type": "WebPage",
-								"@id": context.app.$env.SITE_HOME_URL + '/about-us'
-							},
-							"publisher" : {
-								"@type" : "Organization",
-								"name" : "Project M PLus"
-							},
-							"datePublished": pageData.modified,
-							"dateCreated": pageData.modified,
-							"dateModified": pageData.modified
-							// More structured data...
-						}
-					}
-				})
-				.catch(function (error) {
-					console.log(error);
-				})
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
 	}
 };
 </script>

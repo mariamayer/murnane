@@ -98,11 +98,11 @@ export default {
 					"headline": "${this.post.title.rendered}",
 					"author" : {
 						"@type" : "Person",
-						"name" : "Project M Plus",
+						"name" : "Studio Murnane",
 						"url":"${this.$env.SITE_HOME_URL}"
 					},
 					"creator":[
-						"Project M Plus"
+						"Studio Murnane"
 					],
 					"mainEntityOfPage": {
 						"@type": "WebPage",
@@ -110,7 +110,7 @@ export default {
 					},
 					"publisher" : {
 						"@type" : "Organization",
-						"name" : "Project M PLus"
+						"name" : "Studio Murnane"
 					},
 					"datePublished": "${this.post.date}",
 					"dateCreated": "${this.post.date}",
@@ -121,7 +121,7 @@ export default {
 			link: [
 				{
 					rel: "canonical",
-					href: "https://projectmplus.com" + this.$route.fullPath
+					href: "https://studiomurnane.com" + this.$route.fullPath
 				}
 			]
 		}

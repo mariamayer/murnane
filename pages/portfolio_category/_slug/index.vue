@@ -136,19 +136,19 @@ export default {
 			// 		"headline": "${this.page.title.rendered}",
 			// 		"author" : {
 			// 			"@type" : "Person",
-			// 			"name" : "Project M Plus",
-			// 			"url":"https://projectmplus.com/"
+			// 			"name" : "Studio Murnane",
+			// 			"url":"https://studiomurnane.com/"
 			// 		},
 			// 		"creator":[
-			// 			"Project M Plus"
+			// 			"Studio Murnane"
 			// 		],
 			// 		"mainEntityOfPage": {
 			// 			"@type": "WebPage",
-			// 			"@id": "https://projectmplus.com`+ this.$route.fullPath +`"
+			// 			"@id": "https://studiomurnane.com`+ this.$route.fullPath +`"
 			// 		},
 			// 		"publisher" : {
 			// 			"@type" : "Organization",
-			// 			"name" : "Project M PLus"
+			// 			"name" : "Studio Murnane"
 			// 		},
 			// 		"datePublished": "${this.page.date}",
 			// 		"dateCreated": "${this.page.date}",

@@ -4,7 +4,7 @@
 	>
 		<!-- check if branding -->
 		<b-container
-			class="footer__link-container"
+			class="footer__link-container d-none"
 		>
 			<b-row>
 				<b-col
@@ -33,7 +33,7 @@
 
 
 		<client-only>
-			<div class="footer__instagram">
+			<div class="footer__instagram d-none">
 				<ul class="instagram-list"
 					v-if="isBrandingPages"
 				>
