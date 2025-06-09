@@ -69,7 +69,8 @@ export default {
 			currentArchitectureImage: '',
 			brandingImageIndex: 0,
 			architectureImageIndex: 0,
-			transitionInterval: 2000,
+			transitionInterval: 4000,
+			isFirstTransition: true
 		}
 	},
 
@@ -129,19 +130,29 @@ export default {
 				if (brandingImages && brandingImages.length > 0) {
 					this.brandingImageIndex = (this.brandingImageIndex + 1) % brandingImages.length;
 					this.currentBrandingImage = brandingImages[this.brandingImageIndex].url;
+					
+					// After first transition, update interval to 4s
+					if (this.isFirstTransition) {
+						clearInterval(this.brandingInterval);
+						this.isFirstTransition = false;
+						this.brandingInterval = setInterval(() => {
+							if (brandingImages && brandingImages.length > 0) {
+								this.brandingImageIndex = (this.brandingImageIndex + 1) % brandingImages.length;
+								this.currentBrandingImage = brandingImages[this.brandingImageIndex].url;
+							}
+						}, this.transitionInterval);
+					}
+				}
+			}, 2000); // First transition after 2s
+
+			this.architectureInterval = setInterval(() => {
+				const architectureImages = this.page.acf && this.page.acf.architecture_images;
+				if (architectureImages && architectureImages.length > 0) {
+					this.architectureImageIndex = (this.architectureImageIndex + 1) % architectureImages.length;
+					this.currentArchitectureImage = architectureImages[this.architectureImageIndex].url;
 				}
 			}, this.transitionInterval);
 
-			// Architecture images slideshow - starts after 1 second delay
-			setTimeout(() => {
-				this.architectureInterval = setInterval(() => {
-					const architectureImages = this.page.acf && this.page.acf.architecture_images;
-					if (architectureImages && architectureImages.length > 0) {
-						this.architectureImageIndex = (this.architectureImageIndex + 1) % architectureImages.length;
-						this.currentArchitectureImage = architectureImages[this.architectureImageIndex].url;
-					}
-				}, this.transitionInterval);
-			}, 1000); // 1 second delay
 		}
 	},
 	head () {

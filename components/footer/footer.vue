@@ -82,13 +82,13 @@
 			<b-row>
 				<b-col
 					md=4
-					v-html="contentLeft"
 				>
+					<div v-html="contentLeft"></div>
 				</b-col>
 				<b-col
 					md=4
-					v-html="contentMiddle"
 				>
+					<div v-html="contentMiddle"></div>
 				</b-col>
 				<b-col
 					md=4

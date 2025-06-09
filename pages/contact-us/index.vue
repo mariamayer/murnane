@@ -15,8 +15,8 @@
 			<b-row>
 				<b-col
 					class="contact-page__acf-content pb-6"
-					v-html="page.acf.left_content"
 				>
+					<div v-html="page.acf.left_content"></div>
 				</b-col>
 			</b-row>
 
@@ -24,8 +24,8 @@
 				<b-col
 					md=7
 					class="contact-page__content pb-5"
-					v-html="page.content.rendered"
 				>
+					<div v-html="page.content.rendered"></div>
 				</b-col>
 			</b-row>
 

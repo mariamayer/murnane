@@ -9,8 +9,8 @@
 			>
 				<b-col
 					sm=12
-					v-html="data"
 				>
+					<div v-html="data"></div>
 				</b-col>
 			</b-row>
 		</b-container>
