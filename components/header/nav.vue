@@ -37,13 +37,16 @@
 
 			<b-button
 				class="navigation-modal__close"
-				variant="outline-danger"
+				variant="link"
 				block
 				@click="hideModal"
 				aria-label="close modal"
 				ref="focusThis"
 			>
-				x
+			<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+				<path d="M18 1L1 18" stroke="white"/>
+				<path d="M1 1L18 18" stroke="white"/>
+			</svg>
 			</b-button>
 
 			<ul>

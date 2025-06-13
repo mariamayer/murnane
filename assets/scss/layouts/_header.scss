@@ -20,31 +20,63 @@
 	}
 }
 
+.navigation-modal__close {
+	&:hover {
+		background-color: transparent;
+		border-color: transparent;
+		box-shadow: none;
+	}
+	&:focus {
+		background-color: transparent;
+		border-color: transparent;
+		box-shadow: none;
+	}
+	&:active {
+		background-color: transparent;
+		border-color: transparent;			
+		box-shadow: none;
+	}
+	&:focus-visible {
+		background-color: transparent;
+		border-color: transparent;
+		box-shadow: none;
+	}
+}
+
 .navigation-modal {
+	background-color: #380E11;
 	ul {
 		padding: 0;
 	}
 	li {
 		list-style: none;
 		text-align: center;
+		margin-bottom: 25px;
 	}
 	a {
 		@include indivisible-regular;
 		color: $white;
-		font-size: 52px;
-		line-height: 1.5;
-		transition: color .25s ease-out;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: normal;
+		letter-spacing: 1.28px;
 		text-decoration: none;
-		&.nuxt-link-exact-active {
-			// color: orange;
-			color: $blue;
-		}
-		&:hover {
-			color: $blue;
+		text-transform: uppercase;
+	}
+
+	@media (max-width: 767px) {
+		a {
+			font-size: 14px;
+			font-style: normal;
+			font-weight: 500;
+			line-height: normal;
+			letter-spacing: 1.12px;
 		}
 	}
 	.modal-content {
 		background: none;
+		border: none;
 	}
 	&__close {
 		color: $white;
@@ -59,10 +91,6 @@
 		line-height: .85;
 		&--opacity {
 			opacity: 1;
-		}
-		&:focus {
-			border-color: $white;
-			box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 1);
 		}
 	}
 	&__button-toggle {

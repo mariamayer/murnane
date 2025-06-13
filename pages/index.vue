@@ -101,6 +101,12 @@ export default {
 		if (this.architectureInterval) clearInterval(this.architectureInterval)
 	},
 	methods: {
+		preloadImages(imageArray) {
+			imageArray.forEach(img => {
+				const image = new window.Image();
+				image.src = img.url;
+			});
+		},
 		initializeImages() {
 			console.log('Initializing images...');
 			console.log('Current page data:', this.page);
@@ -111,12 +117,16 @@ export default {
 			const architectureImages = this.page.acf && this.page.acf.architecture_images;
 
 			if (brandingImages && brandingImages.length > 0) {
-				console.log('Setting initial branding image');
+				if (process.client) {
+					this.preloadImages(brandingImages);
+				}
 				this.currentBrandingImage = brandingImages[0].url;
 			}
 			
 			if (architectureImages && architectureImages.length > 0) {
-				console.log('Setting initial architecture image');
+				if (process.client) {
+					this.preloadImages(architectureImages);
+				}
 				this.currentArchitectureImage = architectureImages[0].url;
 			}
 		},
@@ -180,7 +190,23 @@ export default {
 				{
 					rel: "canonical",
 					href: "https://studiomurnane.com"
-				}
+				},
+				// Preload first branding image
+				...(this.page && this.page.acf && this.page.acf.branding_images && this.page.acf.branding_images[0] && this.page.acf.branding_images[0].url
+					? [{
+						rel: "preload",
+						as: "image",
+						href: this.page.acf.branding_images[0].url
+					}]
+					: []),
+				// Preload first architecture image
+				...(this.page && this.page.acf && this.page.acf.architecture_images && this.page.acf.architecture_images[0] && this.page.acf.architecture_images[0].url
+					? [{
+						rel: "preload",
+						as: "image",
+						href: this.page.acf.architecture_images[0].url
+					}]
+					: [])
 			]
 		}
 	},
