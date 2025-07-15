@@ -37,6 +37,9 @@
 							{{ item.title }}
 						</a>
 					</li>
+					<li>
+						<a href="#" onclick="window._klOnsite && window._klOnsite.push(['openForm', 'RcCkpX']); return false;">Newsletter</a>
+					</li>
 				</ul>
 				<ul class="footer__menu footer__menu--social">
 					<li v-for="(item, index) in socialLinks" :key="index">
