@@ -1,7 +1,7 @@
 <template>
 	<footer class="site-footer">
 		<img src="@/assets/images/footer-logo.svg" alt="Murnane" class="footer-bg-logo" aria-hidden="true" />
-		<div class="footer-container">
+		<div class="footer-container container--xl">
 			<div class="footer-left">
 				<svg
 					class="footer-mobile-logo"

@@ -7,14 +7,13 @@
 		width: 100%;
 		padding: 30px 15px;
 		@include media-breakpoint-up(md) {
-			padding: 30px;
+			padding: 30px 0;
 		}
 	}
 	.site-logo {
 		width: 140px;
 		@include media-breakpoint-up(md) {
 			width: 180px;
-			margin-top: 5px;
 		}
 	}
 }
@@ -134,7 +133,7 @@
 		color: $white;
 		position: fixed;
 		top: 30px;
-		right: 30px;
+		right: calc(50% - 650px + 15px);
 		width: 50px;
 		opacity: 0;
 		transition: opacity .25s ease-out;
@@ -143,6 +142,26 @@
 		line-height: .85;
 		&--opacity {
 			opacity: 1;
+		}
+		
+		@media (max-width: 1400px) {
+			right: calc(50% - 600px + 15px);
+		}
+		
+		@media (max-width: 1200px) {
+			right: calc(50% - 570px + 15px);
+		}
+		
+		@media (max-width: 991px) {
+			right: calc(50% - 480px + 15px);
+		}
+		
+		@media (max-width: 767px) {
+			right: calc(50% - 360px + 15px);
+		}
+		
+		@media (max-width: 575px) {
+			right: 1rem;
 		}
 	}
 	&__button-toggle {

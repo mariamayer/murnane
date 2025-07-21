@@ -4,7 +4,7 @@
 		class="header header--main"
 	>
 
-		<div class="header__container" :class="{ 'header--dark': isDarkHeader }">
+		<div class="header__container container--xl" :class="{ 'header--dark': isDarkHeader }">
 			<div class="header__side">
 				<div v-if="$route.path !== '/'" class="header-links">
 					<nuxt-link
@@ -145,7 +145,9 @@ export default {
 			return this.$store.state.wordPressMenu
 		},
 		isDarkHeader() {
-			return this.$route.path === '/contact-us' || this.$route.path === '/journal';
+			return this.$route.path === '/contact-us' || 
+			   this.$route.path === '/journal' || 
+			   this.$route.path.startsWith('/portfolio_category/');
 		}
 	}
 }
