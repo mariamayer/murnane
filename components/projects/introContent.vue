@@ -64,7 +64,7 @@
 							<nuxt-link
 								v-for="item in taxonomyList"
 								:key="item.term_id"
-								:to="'/'+item.taxonomy+'/'+item.slug"
+								:to="item.taxonomy === 'portfolio_category' ? '/' + item.slug : '/' + item.taxonomy + '/' + item.slug"
 							>
 								<span>
 									#{{item.name}}
@@ -76,9 +76,10 @@
 
 				<b-col
 					md="6"
-					v-html="postContent"
 					class="single-project__text"
-				></b-col>
+				>
+					<div v-html="postContent"></div>
+				</b-col>
 
 			</b-row>
 		</b-container>

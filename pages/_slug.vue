@@ -1,7 +1,7 @@
 <template>
 	<article
 			class="pt-7 posts-page"
-		>
+	>
 		<b-container
 			class="container--xl pb-5 portfolio-category-header"
 			id="first-text"
@@ -38,7 +38,11 @@
 							class="portfolio-item__link"
 						>
 							<div class="portfolio-item__image">
-								<b-img-lazy v-bind="mainProps" :src="item.image" :alt="item.name"></b-img-lazy>
+								<b-img-lazy 
+									v-bind="mainProps" 
+									:src="item.acf && item.acf.featured_image ? item.acf.featured_image : item.image" 
+									:alt="item.name"
+								></b-img-lazy>
 							</div>
 							<div class="portfolio-item__content p-0">
 								<h3 class="portfolio-item__title mb-0" v-html="item.name"></h3>
@@ -100,12 +104,11 @@ export default {
 			postsPage: 2,
 			mainProps: {
 				center: true,
-				fluidGrow: true,
 				blank: true,
 				blankColor: "#bbb",
 				class: "",
-				width: 640,
-          		height: 581,
+				width: 412,
+          		height: 515,
 			}
 		}
 	},
@@ -155,55 +158,67 @@ export default {
 	},
 	async asyncData (context) {
 
-		const pageResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL+ 'wp/v2/portfolio_category?slug=' + context.params.slug);
-		const postsResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL + 'rmh/v1/multiple_types/' + context.params.slug);
-
-		console.log('Posts Response:', postsResponse.data);
-		console.log('First post item structure:', postsResponse.data[0]);
-		
-		// Add ACF data to each post item
-		const postsWithAcf = await Promise.all(postsResponse.data.map(async (item) => {
-			try {
-				// Check what properties are available
-				console.log('Item properties:', Object.keys(item));
-				console.log('Item ID:', item.id || item.ID);
-				console.log('Item post_type:', item.post_type);
-				
-				// Use the correct property names based on what's available
-				const postId = item.id || item.ID;
-				const postType = item.post_type || 'portfolio'; // fallback to portfolio
-				
-				if (!postId) {
-					console.log('No ID found for item:', item);
-					return { ...item, acf: {} };
-				}
-				
-				// Fetch ACF data for each post
-				const acfResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL + `wp/v2/${postType}/${postId}?_embed`);
-				console.log(`ACF for ${item.name}:`, acfResponse.data.acf);
-				return {
-					...item,
-					acf: acfResponse.data.acf || {}
-				};
-			} catch (error) {
-				console.log(`Error fetching ACF for ${item.name}:`, error);
-				return {
-					...item,
-					acf: {}
-				};
+		try {
+			const pageResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL+ 'wp/v2/portfolio_category?slug=' + context.params.slug);
+			
+			// Check if we found a portfolio category
+			if (!pageResponse.data || pageResponse.data.length === 0) {
+				// If no portfolio category found, throw 404
+				throw new Error('Portfolio category not found');
 			}
-		}));
+			
+			const postsResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL + 'rmh/v1/multiple_types/' + context.params.slug);
 
-		const totalPostPages = parseInt(postsResponse.headers['x-wp-totalpages']);
-		let loadMoreBool = true;
-		if(2 > totalPostPages){
-			loadMoreBool = false;
-		}
+			console.log('Posts Response:', postsResponse.data);
+			console.log('First post item structure:', postsResponse.data[0]);
+			
+			// Add ACF data to each post item
+			const postsWithAcf = await Promise.all(postsResponse.data.map(async (item) => {
+				try {
+					// Check what properties are available
+					console.log('Item properties:', Object.keys(item));
+					console.log('Item ID:', item.id || item.ID);
+					console.log('Item post_type:', item.post_type);
+					
+					// Use the correct property names based on what's available
+					const postId = item.id || item.ID;
+					const postType = item.post_type || 'portfolio'; // fallback to portfolio
+					
+					if (!postId) {
+						console.log('No ID found for item:', item);
+						return { ...item, acf: {} };
+					}
+					
+					// Fetch ACF data for each post
+					const acfResponse = await context.app.$axios.get(context.app.$env.PREVIEW_URL + `wp/v2/${postType}/${postId}?_embed`);
+					console.log(`ACF for ${item.name}:`, acfResponse.data.acf);
+					return {
+						...item,
+						acf: acfResponse.data.acf || {}
+					};
+				} catch (error) {
+					console.log(`Error fetching ACF for ${item.name}:`, error);
+					return {
+						...item,
+						acf: {}
+					};
+				}
+			}));
 
-		return {
-			page: pageResponse.data[0],
-			posts: postsWithAcf,
-			enoughPages: loadMoreBool
+			const totalPostPages = parseInt(postsResponse.headers['x-wp-totalpages']);
+			let loadMoreBool = true;
+			if(2 > totalPostPages){
+				loadMoreBool = false;
+			}
+
+			return {
+				page: pageResponse.data[0],
+				posts: postsWithAcf,
+				enoughPages: loadMoreBool
+			}
+		} catch (error) {
+			// If any error occurs (including 404), redirect to 404 page
+			context.error({ statusCode: 404, message: 'Page not found' });
 		}
 
 	}
@@ -280,10 +295,12 @@ export default {
 		&__image {
 			margin-bottom: 1rem;
 			overflow: hidden;
+			aspect-ratio: 412 / 515;
 			
 			img {
 				width: 100%;
-				height: auto;
+				height: 100%;
+				object-fit: cover;
 				display: block;
 				transition: transform 0.3s ease-out;
 			}
@@ -317,5 +334,4 @@ export default {
 		}
 	}
 }
-</style>
-
+</style> 

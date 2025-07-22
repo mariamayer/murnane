@@ -103,6 +103,11 @@ module.exports = {
 		{ src: `~plugins/sentry.js`, ssr: false }
 	],
 	/*
+	 ** Global middleware
+	 */
+	router: {
+	},
+	/*
 	 ** Nuxt.js dev-modules
 	 */
 	buildModules: [],

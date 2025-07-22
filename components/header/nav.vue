@@ -147,7 +147,16 @@ export default {
 		isDarkHeader() {
 			return this.$route.path === '/contact-us' || 
 			   this.$route.path === '/journal' || 
-			   this.$route.path.startsWith('/portfolio_category/');
+			   this.$route.path.startsWith('/portfolio_category/') ||
+			   (this.$route.path !== '/' && 
+			    this.$route.path !== '/branding' && 
+			    this.$route.path !== '/architecture-interiors' && 
+			    this.$route.path !== '/about-us' && 
+			    this.$route.path !== '/contact-us' && 
+			    this.$route.path !== '/journal' && 
+			    !this.$route.path.startsWith('/portfolio/') && 
+			    !this.$route.path.startsWith('/architecture_project/') && 
+			    this.$route.path.split('/').length === 2);
 		}
 	}
 }
