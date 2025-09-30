@@ -17,7 +17,7 @@
 			:data="page.acf.project_selector"
 		></masonry-content>
 
-		<cta-section set-class="pb-7" button-url="https://calendly.com/josh-studiomurnane"></cta-section>
+		<cta-section set-class="pb-7" button-url="https://calendly.com/cleo-studiomurnane/brand-consult-studio-murnane"></cta-section>
 
 		<section
 			class="mb-7"

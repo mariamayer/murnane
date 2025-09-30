@@ -42,9 +42,9 @@
 			</b-row>
 		</b-container>
 		<cta-section cta-title="Book a Free Consult"
-			button-url="https://calendly.com/josh-studiomurnane/30min?back=1month=2025-03"
+			button-url="https://calendly.com/cleo-studiomurnane/brand-consult-studio-murnane"
 			button-text="Architecture + Interiors"
-			button2-url="https://calendly.com/cleo-studiomurnane/brand-consult-studio-murnane?month=2025-03"
+			button2-url="https://calendly.com/cleo-studiomurnane/brand-consult-studio-murnane"
 			button2-text="Brand Development" set-class="left pt-7" />
 	</article>
 </template>
